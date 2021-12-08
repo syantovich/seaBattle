@@ -3,14 +3,10 @@ var myVar;
 var rec = [];
 let flagRec = true;
 let kInfo = 1;
-var hammertimeSwipe = new Hammer(document);
-
-
+let wrap= document.querySelector(".wrap");
+var hammertimeSwipe = new Hammer(wrap);
 hammertimeSwipe.get('swipe').set({
-	direction: Hammer.DIRECTION_ALL,
-	pointers: 1,
-	threshold:10,
-	velocity:0.3
+	direction: Hammer.DIRECTION_ALL
 });
 
 
@@ -53,6 +49,7 @@ function fetchrRec() {
 fetchrRec();
 
 hammertimeSwipe.on('swipe', function (ev) {
+	console.log(ev);
 	ev.preventDefault();
 	alert(1);
 			let divRec = document.querySelector("#rec"),
