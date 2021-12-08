@@ -487,7 +487,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 				document.addEventListener('touchend', this.onMouseUp.bind(this));
 				myArea_field.addEventListener('contextmenu', this.rotationShip.bind(this));
 				var hammertimeRotate = new Hammer(myArea_field);
-				hammertimeRotate.on('pressup', this.rotationShip.bind(this));
+				hammertimeRotate.on('press', this.rotationShip.bind(this));
 				flagHandPos = true;
 			}
 
@@ -632,7 +632,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 
 			rotationShip(e) {
 				e.preventDefault();
-				let ft= e.which == 3||  e.type=="pressup";
+				let ft= e.which == 3||  e.type=="press";
 				if (!ft || flagStart) return;
 
 				const el = e.target.closest('.ship');
