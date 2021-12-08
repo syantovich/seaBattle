@@ -1,0 +1,467 @@
+/* reset */
+:root{
+    --myvar:min(1vh,1vw);
+}
+.delete { display: none; }
+html,
+body,
+div,
+span,
+h1,
+h2,
+p,
+a,
+img,
+strong,
+ul,
+li,
+button,
+footer,
+header {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+*,
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a,
+button,
+div {
+    outline: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    border: none;
+}
+
+/* grid */
+html,
+body,
+.wrap {
+    height: 100%;
+    overflow: hidden;
+}
+
+.wrap {
+    width: 100%;
+}
+
+.ship,
+.icon-field,
+.btn-play {
+    background: url('../img/sprite.png') no-repeat;
+    background-size:calc(var(--myvar) * 50.631);
+}
+
+/* typography */
+body {
+    font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: calc(var(--myvar) * 2.755);
+    color: #b9001f;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* buttons */
+.btn-play {
+    width: calc(var(--myvar) * 16.533);
+    height: calc(var(--myvar) * 5.166);
+    font-family: Playfair Display;
+    font-size: calc(var(--myvar) * 2.755);
+    line-height: calc(var(--myvar) * 4.592);
+    color: #b9001f;
+    text-align: center;
+    background-position: 0 calc(var(--myvar) * -17.222);
+    cursor: pointer;
+}
+
+.btn-newgame {
+    font-size: calc(var(--myvar) * 2.181);
+    margin-top: 10px;
+}
+
+/* display */
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+/*** CONTENT ***/
+
+.battlefield {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: url('../img/sea.jpg');
+    background-size: 100%;
+}
+
+.text-top {
+    height: calc(var(--myvar) * 7.577);
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--myvar) * 2.526);
+    margin-bottom: 7px;
+}
+
+.service-row {
+    text-align: center;
+}
+
+.service-text {
+    color: #c00;
+    padding-top: calc(var(--myvar) * 1.148);
+}
+
+.outer {
+    margin-bottom: calc(var(--myvar) * 2.411);
+    padding-left: calc(var(--myvar) * 4.363);
+}
+
+.field {
+    width: calc(var(--myvar) * 41.33);
+    height: calc(var(--myvar)* 41.33);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.field-computer {
+    margin-left: calc(var(--myvar) * 3.56);
+}
+
+.ships {
+    margin:calc(var(--myvar) * -0.574) 0px 0px calc(var(--myvar) * -0.574);
+    border:calc(var(--myvar) * 0.574) solid black;
+    box-sizing:content-box;
+    width: calc(var(--myvar) * 37.887);
+    height: calc(var(--myvar) * 37.877);
+    position: relative;
+    left: calc(var(--myvar) * 3.330);
+    top: calc(var(--myvar) * 3.1);
+    background: url('../img/grid.png') repeat;
+    background-size:calc(var(--myvar) * 7.577);
+}
+
+.ship {
+    height: calc(var(--myvar) * 4.018);
+    position: absolute;
+}
+
+.vertical {
+    transform: rotate(90deg);
+    transform-origin: calc(var(--myvar) * 2.009) calc(var(--myvar) * 2.009);
+}
+
+.four {
+    width: calc(var(--myvar) * 15.385);
+    background-position: 0 0;
+}
+
+.four.success {
+    background-position: 0 calc(var(--myvar) * -5.74);;
+}
+
+.four.unsuccess {
+    background-position: 0 calc(var(--myvar) * -11.481);
+}
+
+.three {
+    width: calc(var(--myvar) * 11.596);
+    background-position: calc(var(--myvar) * -17.222) 0;
+}
+
+.three.success {
+    background-position: calc(var(--myvar) * -17.222) calc(var(--myvar) * -5.74);
+}
+
+.three.unsuccess {
+    background-position: calc(var(--myvar) * -17.222) calc(var(--myvar) * -11.481);
+}
+
+.two {
+    width: calc(var(--myvar) * 7.807);
+    background-position: calc(var(--myvar) * -30.999) 0;
+}
+
+.two.success {
+    background-position: calc(var(--myvar) * -30.999) calc(var(--myvar) * -5.74);;
+}
+
+.two.unsuccess {
+    background-position: calc(var(--myvar) * -30.999) calc(var(--myvar) * -11.481);
+}
+
+.one {
+    width: calc(var(--myvar) * 4.018);
+    background-position: calc(var(--myvar) * -41.332) 0;
+}
+
+.one.success {
+    background-position: calc(var(--myvar) * -41.332) calc(var(--myvar) * -5.74);;
+}
+
+.one.unsuccess {
+    background-position: calc(var(--myvar) * -41.332) calc(var(--myvar) * -11.481);
+}
+
+.instruction {
+    margin-left: calc(var(--myvar) * 2.985);
+    -webkit-user-select: none;
+    user-select: none;
+    max-width: calc(100vw - var(--myvar) / 3.887);
+}
+
+.type-placement-box {
+    line-height: calc(var(--myvar) * 3.904);
+    padding-bottom: calc(var(--myvar) * 2.066);
+}
+
+.type-placement-box .link {
+    font-size: calc(var(--myvar) * 2.296);
+    border-bottom: dashed calc(var(--myvar) * 0.23) #4530af;
+    cursor: pointer;
+}
+
+.initial-ships li {
+    height: calc(var(--myvar) * 4.018);
+    position: relative;
+    overflow: hidden;
+    margin-top: calc(var(--myvar) * 3.559);
+}
+
+.initial-ships .ship {
+    left: 0;
+    top: 0;
+    float: left;
+    cursor: move;
+}
+
+.initial-ships .three1 {
+    left: calc(var(--myvar) * 18.829);
+}
+
+.initial-ships .three2 {
+    left: calc(var(--myvar) * 34.099);
+}
+
+.initial-ships .two2 {
+    left: calc(var(--myvar) * 11.366);
+}
+
+.initial-ships .two3 {
+    left: calc(var(--myvar) * 22.617);
+}
+
+.initial-ships .one2 {
+    left: calc(var(--myvar) * 7.463);
+}
+
+.initial-ships .one3 {
+    left: calc(var(--myvar) * 15.04);
+}
+
+.initial-ships .one4 {
+    left: calc(var(--myvar) * 22.618);
+}
+
+.icon-field {
+    width: calc(var(--myvar) * 3.789);
+    height: calc(var(--myvar) * 3.789);
+    display: block;
+    position: absolute;
+    z-index: 5;
+}
+
+.dot {
+    background-position: calc(var(--myvar) * -47.072) 0;
+}
+
+.red-cross {
+    background-position: calc(var(--myvar) * -47.072) calc(var(--myvar) * -5.74);;
+}
+
+.shaded-cell {
+    background-position: calc(var(--myvar) * -47.072) calc(var(--myvar) * -11.481);
+}
+
+.shaded-cell_red {
+    background-position: calc(var(--myvar) * -47.072) calc(var(--myvar) * -16.073);
+}
+#rec{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between ;
+    align-items:center;
+    position: absolute;
+    top:0px;
+    width: 50%;
+    height:100%;
+    border-radius: 10% 0 0 10%;
+    right: 0px;
+    z-index: 3000;
+    background-color: #eeb46d;
+}
+ #rul{
+    padding-top: var(--myvar);
+    padding-bottom: 5%;
+    padding-left: 3%;
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    border-radius: 0 0 10% 10%;
+    z-index: 3000;
+    background-color: #eeb46d;
+    font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: calc(var(--myvar) * 2.755);
+    color: #b9001f;
+ }
+ #rul p{margin-bottom: 0px;}
+
+.explosion {
+    background-position: calc(var(--myvar) * -17.222) calc(var(--myvar) * -17.222);
+    z-index: 6;
+    opacity: 0;
+    transform: scale(.2);
+}
+
+@keyframes Explosion {
+    0% {
+        opacity: 0;
+        transform: scale(.2);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.explosion.active {
+    animation-name: Explosion;
+    animation-duration: 0.4s;
+    transform: scale(1);
+}
+@keyframes toLeft {
+    from{
+        transform: translateX(-50%) ;
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+@keyframes toRight {
+    from{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to{
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+}
+@keyframes toUp {
+    from{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    to{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+@keyframes toDown {
+    from{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+.l{
+    overflow: hidden;
+    animation-name: toRight;
+    animation-duration: 1s;
+    opacity: 0;
+    
+}
+.r{
+    overflow: hidden;
+    animation-duration:1s;
+    animation-name:toLeft;
+    right: -50%;
+}
+.u{
+    overflow: hidden;
+    animation-name: toUp;
+    animation-duration: 1s;
+    opacity: 0;
+    
+}
+.d{
+    overflow: hidden;
+    animation-duration:1s;
+    animation-name:toDown;
+    right: -50%;
+}
+.firstR{
+    right: -50%;
+    opacity: 0;
+    display: none!important;
+}
+.firstL{
+    top: -100%;
+    opacity: 0;
+    display: none!important;
+}
+g .off{
+    display: none;
+}
+#icons{
+    z-index: 2000;
+    position: absolute;
+    display: flex;
+
+    left: calc(var(--myvar) *  4);
+    top: calc(var(--myvar)*70);
+    overflow: hidden;
+}
+#menuicon{
+    z-index: 2;
+    transition:transform 0.5s linear;
+}
+#icons:hover #iconsMenu{
+    left: calc(var(--myvar) * 0);
+}
+#icons:hover #menuicon{
+    transform: rotate(90deg);
+}
+#iconsMenu{
+    z-index: 0;
+    position: relative;
+    left:calc(var(--myvar) * -50);
+    transition:left 0.5s linear;
+}

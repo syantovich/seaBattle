@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-computeratible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Игра Морской бой</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100&display=swap"
+        rel="stylesheet">
+    <link href="style/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="matrix" style="position: fixed; left:20px; top:50px;"></div>
+    <div class="wrap">
+        <div id="rec" class="firstR">
+            
+        </div>
+        <div id="rul" class="firstL">
+            <h4>В левом поле(начальном) располагаются ваши корабли</h4>
+            <p>Их всего 10 шт</p>
+            <ul>
+                <li>4-x палубный - 1 штука</li>
+                <li>3-x палубный - 2 штуки</li>
+                <li>2-x палубный - 3 штуки</li>
+                <li>1-x палубный - 4 штуки</li>
+            </ul>
+            <h4>Правила расположения кораблей</h4>
+            <p> Нельзя, чтобы корабли соприкасались ни боками, ни, даже, уголками. Как минимум одна клетка между ними должна быть обязательно. К краям поля корабли прижимать можно.</p>
+            <p>При размещении методом перетаскивания - перетащите мышкой корабли на игровое поле. Для установки корабля по вертикали, кликните по
+                нему правой кнопкой мышки.</p>
+            <p>При размещении случайным образом - корабли и их напрвления будут расставлены случайно</p>
+
+            <h4>Цель данной игры</h4>
+            <p>Победить компьютер. Игра заканчивается после 1 поражения компьютеру</p>
+        </div>
+        <div class="battlefield">
+            <div id="icons">
+                <svg width=100 height=100 id="menuicon" class="svg" version="1.1" viewBox="0 0 512 512"
+                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g>
+                        <g>
+                            <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="-0.0000027" x2="512"
+                                y1="256" y2="256">
+                                <stop offset="0" style="stop-color:#33B49D" />
+                                <stop offset="1" style="stop-color:#00A185" />
+                            </linearGradient>
+                            <circle cx="256" cy="256" fill="url(#SVGID_1_)" r="256" />
+                            <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_2_" x1="42.6666641"
+                                x2="469.3333435" y1="256.0005188" y2="256.0005188">
+                                <stop offset="0" style="stop-color:#00A185" />
+                                <stop offset="1" style="stop-color:#33B49D" />
+                            </linearGradient>
+                            <path
+                                d="M256,469.3338623c-117.6315308,0-213.3333435-95.7023926-213.3333435-213.3333435    c0-117.6314545,95.7018051-213.333313,213.3333435-213.333313c117.6362,0,213.3333435,95.7018661,213.3333435,213.333313    C469.3333435,373.6314697,373.6362,469.3338623,256,469.3338623z"
+                                fill="url(#SVGID_2_)" />
+                        </g>
+                        <g>
+                            <circle cx="170.0324707" cy="174.964798" opacity="0.3" r="26.0319996" />
+                            <rect height="10" opacity="0.3" width="161.7552032" x="222.2442017" y="169.965332" />
+                            <circle cx="170.0324707" cy="264" opacity="0.3" r="26.0319996" />
+                            <rect height="10" opacity="0.3" width="161.7552032" x="222.2442017" y="259.0010681" />
+                            <circle cx="170.0324707" cy="353.034668" opacity="0.3" r="26.0319996" />
+                            <rect height="10" opacity="0.3" width="161.7552032" x="222.2442017" y="348.0341492" />
+                        </g>
+                        <g>
+                            <circle cx="162.0324707" cy="166.964798" fill="#FFFFFF" r="26.0319996" />
+                            <rect fill="#FFFFFF" height="10" width="161.7552032" x="214.2442017" y="161.965332" />
+                            <circle cx="162.0324707" cy="256" fill="#FFFFFF" r="26.0319996" />
+                            <rect fill="#FFFFFF" height="10" width="161.7552032" x="214.2442017" y="251.0010681" />
+                            <circle cx="162.0324707" cy="345.034668" fill="#FFFFFF" r="26.0319996" />
+                            <rect fill="#FFFFFF" height="10" width="161.7552032" x="214.2442017" y="340.0341492" />
+                        </g>
+                    </g>
+                </svg>
+                <div id="iconsMenu">
+                    <svg width=100 height=100 id="rulseicon" class="svg" version="1.1" viewBox="0 0 512 512"
+                        xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g>
+                            <g>
+                                <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="-0.0000027" x2="512"
+                                    y1="256" y2="256">
+                                    <stop offset="0" style="stop-color:#33B49D" />
+                                    <stop offset="1" style="stop-color:#00A185" />
+                                </linearGradient>
+                                <circle cx="256" cy="256" fill="url(#SVGID_1_)" r="256" />
+                                <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_2_" x1="42.6666641"
+                                    x2="469.3333435" y1="256.0005188" y2="256.0005188">
+                                    <stop offset="0" style="stop-color:#00A185" />
+                                    <stop offset="1" style="stop-color:#33B49D" />
+                                </linearGradient>
+                                <path
+                                    d="M256,469.3338623c-117.6315308,0-213.3333435-95.7023926-213.3333435-213.3333435    c0-117.6314545,95.7018051-213.333313,213.3333435-213.333313c117.6362,0,213.3333435,95.7018661,213.3333435,213.333313    C469.3333435,373.6314697,373.6362,469.3338623,256,469.3338623z"
+                                    fill="url(#SVGID_2_)" />
+                            </g>
+                            <text x=256 y=280 text-anchor="middle" font-size=100 fill=white>Rulse</text>
+                        </g>
+                    </svg>
+                    <svg width=100 height=100 id="recordsicon" class="svg" version="1.1" viewBox="0 0 512 512"
+                        xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g>
+                            <g>
+                                <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="-0.0000027" x2="512"
+                                    y1="256" y2="256">
+                                    <stop offset="0" style="stop-color:#33B49D" />
+                                    <stop offset="1" style="stop-color:#00A185" />
+                                </linearGradient>
+                                <circle cx="256" cy="256" fill="url(#SVGID_1_)" r="256" />
+                                <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_2_" x1="42.6666641"
+                                    x2="469.3333435" y1="256.0005188" y2="256.0005188">
+                                    <stop offset="0" style="stop-color:#00A185" />
+                                    <stop offset="1" style="stop-color:#33B49D" />
+                                </linearGradient>
+                                <path
+                                    d="M256,469.3338623c-117.6315308,0-213.3333435-95.7023926-213.3333435-213.3333435    c0-117.6314545,95.7018051-213.333313,213.3333435-213.333313c117.6362,0,213.3333435,95.7018661,213.3333435,213.333313    C469.3333435,373.6314697,373.6362,469.3338623,256,469.3338623z"
+                                    fill="url(#SVGID_2_)" />
+                            </g>
+                            <text x=256 y=280 text-anchor="middle" font-size=100 fill=white>Records</text>
+                        </g>
+                    </svg>
+                    <svg width=100 height=100 version="1.1" class="svg" id="musicicon" viewBox="0 0 512 512"
+                        xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g>
+                            <g>
+                                <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="0.0000038" x2="512"
+                                    y1="256" y2="256">
+                                    <stop offset="0" style="stop-color:#33B49D" />
+                                    <stop offset="1" style="stop-color:#00A185" />
+                                </linearGradient>
+                                <circle cx="256" cy="256" fill="url(#SVGID_1_)" r="256" />
+                                <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_2_" x1="42.6666679"
+                                    x2="469.3333435" y1="256.0005188" y2="256.0005188">
+                                    <stop offset="0" style="stop-color:#00A185" />
+                                    <stop offset="1" style="stop-color:#33B49D" />
+                                </linearGradient>
+                                <path
+                                    d="M256,469.3338623c-117.6314697,0-213.3333282-95.7018738-213.3333282-213.3333435    S138.3685303,42.6671982,256,42.6671982c117.6357422,0,213.3333435,95.7018661,213.3333435,213.333313    S373.6357422,469.3338623,256,469.3338623z"
+                                    fill="url(#SVGID_2_)" />
+                            </g>
+                            <g>
+                                <path
+                                    d="M144,224.694397v78.6154785c0,5.5221252,4.4773407,10,10,10h50.4960022V214.694397H154    C148.4773407,214.694397,144,219.1717377,144,224.694397z"
+                                    opacity="0.3" />
+                                <polygon opacity="0.3"
+                                    points="214.4955597,320.5920105 292.9898682,377.776001 292.9898682,150.223465 214.4955597,207.4074707       " />
+
+                            </g>
+                            <g>
+                                <path
+                                    d="M136,216.694397v78.6154785c0,5.5221252,4.4773407,10,10,10h50.4960022V206.694397H146    C140.4773407,206.694397,136,211.1717377,136,216.694397z"
+                                    fill="#FFFFFF" />
+                                <polygon fill="#FFFFFF"
+                                    points="206.4955597,312.5920105 284.9898682,369.776001 284.9898682,142.223465 206.4955597,199.4074707       " />
+                                <g class="on">
+                                    <path
+                                        d="M342.1717224,174.2138672l-7.0704041,7.06987    c19.9242859,19.9269257,30.8982544,46.4597321,30.8982544,74.7167816c0,28.2570801-10.9739685,54.7904053-30.8982544,74.7168274    l7.0704041,7.0703735c21.8138733-21.8117065,33.8278503-50.8597107,33.8278503-81.7872009    C375.9995728,225.0725403,363.9855957,196.0250702,342.1717224,174.2138672z"
+                                        fill="#FFFFFF" />
+                                    <path
+                                        d="M313.8976135,201.9824066l-7.0698853,7.0698547c25.8832092,25.8890686,25.8832092,68.0080109,0,93.8965302    l7.0698853,7.0704041C343.683197,280.2341309,343.683197,231.7674713,313.8976135,201.9824066z"
+                                        fill="#FFFFFF" />
+                                </g>
+                                <g class="off">
+                                    <polygon fill="#FFFFFF"
+                                        points="375.9995728,223.5797272 368.9290771,216.5098724 336.5098572,248.9290619     304.0906677,216.5098724 297.0202637,223.5797272 329.4395447,255.9994659 297.0202637,288.4186707 304.0906677,295.4890747     336.5098572,263.0698547 368.9290771,295.4890747 375.9995728,288.4186707 343.5802612,255.9994659   " />
+                                </g>
+
+                            </g>
+                        </g>
+                    </svg>
+
+                </div>
+            </div>
+            <div id="text_top" class="flex text-top">Расстановка кораблей</div>
+            <div class="flex outer">
+                <!-- playing field human -->
+                <div class="field field-human">
+                    <div id="myArea" class="ships"></div>
+                </div>
+                <!-- /playing field human -->
+
+                <!-- playing field computer -->
+                <div class="field field-computer" hidden>
+                    <div id="pcArea" class="ships"></div>
+                </div>
+                <!-- /playing field computer -->
+
+                <!-- instruction -->
+                <div id="instruction" class="instruction">
+                    <div id="type_placement" class="type-placement-box">
+                        1. <span class="link" data-target="random">Случайным образом</span><br>
+                        2. <span class="link" data-target="manually">Методом перетаскивания.</span>
+                    </div>
+                    <div id="ships_collection" class="ships-collection" hidden>
+                        
+                    </div>
+                </div>
+                <!-- /instruction -->
+            </div>
+            <div class="service-row">
+                <div id="service_text" class="service-text"></div>
+                <button id="play" type="button" class="btn-play" hidden>Играть</button></button>
+                <button id="newgame" type="button" class="btn-play btn-newgame" hidden>Продолжить</button>
+            </div>
+        </div>
+    </div>
+
+    <ul class="initial-ships" hidden>
+        <li>
+            <div id="four1" class="ship four"></div>
+            <div id="three1" class="ship three three1"></div>
+            <div id="three2" class="ship three three2"></div>
+        </li>
+        <li>
+            <div id="two1" class="ship two"></div>
+            <div id="two2" class="ship two two2"></div>
+            <div id="two3" class="ship two two3"></div>
+        </li>
+        <li>
+            <div id="one1" class="ship one"></div>
+            <div id="one2" class="ship one one2"></div>
+            <div id="one3" class="ship one one3"></div>
+            <div id="one4" class="ship one one4"></div>
+        </li>
+    </ul>
+
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
