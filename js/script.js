@@ -1,4 +1,5 @@
 "use strict"
+alert(1);
 var myVar;
 var rec = [];
 let flagRec = true;
