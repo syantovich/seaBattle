@@ -49,9 +49,9 @@ function fetchrRec() {
 fetchrRec();
 
 hammertimeSwipe.on('swipe', function (ev) {
-	console.log(ev);
+
 	ev.preventDefault();
-	alert(1);
+
 			let divRec = document.querySelector("#rec"),
 				divRul = document.querySelector("#rul");
 			let direc = ev.direction;
