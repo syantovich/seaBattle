@@ -1,9 +1,14 @@
 "use strict"
-alert(1);
 var myVar;
 var rec = [];
 let flagRec = true;
 let kInfo=1;
+var hammertime = new Hammer(document);
+hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+hammertime.on('swipe', function(ev) {
+	alert(1);
+	console.log(ev);
+});
 
 function records() {
 	let divRec = document.querySelector("#rec");
@@ -65,7 +70,7 @@ function detectswipe() {
 	}, false);
 	document.addEventListener('touchmove', function (e) {
 		if (flagRec) {
-			e.preventDefault();
+			
 			var t = e.touches[0];
 			swipe_det.eX = t.screenX;
 			swipe_det.eY = t.screenY;
