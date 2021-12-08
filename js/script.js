@@ -6,9 +6,11 @@ let kInfo = 1;
 var hammertimeSwipe = new Hammer(document);
 
 
-
 hammertimeSwipe.get('swipe').set({
-	direction: Hammer.DIRECTION_ALL
+	direction: Hammer.DIRECTION_ALL,
+	pointers: 1,
+	threshold:10,
+	velocity:0.3
 });
 
 
