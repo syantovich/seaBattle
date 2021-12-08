@@ -33,7 +33,6 @@ function fetchrRec(){
 	.then(response => response.json())
 	.then(data => {
 		rec = JSON.parse(data.result);
-		console.log(rec);
 		records();
 	})
 	.catch(error => {
@@ -158,23 +157,20 @@ let myArea_field = document.querySelector("#myArea");
 
 let pcArea_field = document.querySelector("#pcArea");
 
-// родительский контейнер с инструкцией
+
 const instruction = document.getElementById('instruction');
-// контейнер, в котором будут размещаться корабли, предназначенные для перетаскивания
-// на игровое поле
+
 const shipsCollection = document.getElementById('ships_collection');
-// контейнер с набором кораблей, предназначенных для перетаскивания
-// на игровое поле
+
 const initialShips = document.querySelector('.wrap + .initial-ships');
-// контейнер с заголовком
+
 const toptext = document.getElementById('text_top');
-// кнопка начала игры
+
 const buttonPlay = document.getElementById('play');
-// кнопка перезапуска игры
+
 const buttonNewGame = document.getElementById('newgame');
 
-// получаем экземпляр игрового поля игрока
-// экземпляр игрового поля только регистрируем
+
 var pcArea = {};
 
 let control = null;
@@ -319,7 +315,7 @@ class Area {
 			toX,
 			toY;
 
-		//от и до не включительно по х
+
 		fromX = (x == 0) ? x : x - 1;
 		if (x + kx * kolpalub == 10 && ky == 0) {
 			toX = 10;
@@ -337,7 +333,6 @@ class Area {
 			}
 		}
 
-		//от и до не включительно по y
 		fromY = (y == 0) ? y : y - 1;
 		if (y + ky * kolpalub == 10 && kx == 0) {
 			toY = 10;
@@ -354,7 +349,7 @@ class Area {
 				}
 			}
 		}
-		console.log(obj);
+
 		if (toX === undefined || toY === undefined) return false;
 		for (let i = fromY; i < toY; i++) {
 			for (let j = fromX; j < toX; j++) {
@@ -403,20 +398,11 @@ class Ship {
 		} = this;
 		life = kolpalub;
 		while (k < kolpalub) {
-			// записываем координаты корабля в двумерный массив игрового поля
-			// теперь наглядно должно быть видно, зачем мы создавали два
-			// коэффициента направления палуб
-			// если коэффициент равен 1, то соответствующая координата будет
-			// увеличиваться при каждой итерации
-			// если равен нулю, то координата будет оставаться неизменной
-			// таким способом мы очень сократили и унифицировали код
 			let i = y + k * ky,
 				j = x + k * kx;
 
-			// значение 1, записанное в ячейку двумерного массива, говорит о том, что
-			// по данным координатам находится палуба некого корабля
 			player.matrix[i][j] = 1;
-			// записываем координаты палубы
+
 			arrkolpalub.push([i, j]);
 			k++;
 		}
@@ -464,50 +450,41 @@ buttonPlay.addEventListener("click", (e) => {
 	pcArea.randomLocation();
 	flagStart = true;
 	if (!control) control = new Controller();
-	// запускаем игру
+
 	control.init();
 });
 
 
 document.getElementById('type_placement').addEventListener('click', function (e) {
 	flagRec = false;
-	// используем делегирование основанное на всплытии событий
+
 	if (e.target.tagName != 'SPAN') return;
 
-	// если мы уже создали эскадру ранее, то видна кнопка начала игры
-	// скроем её на время повторной расстановки кораблей
 	buttonPlay.hidden = true;
-	// очищаем игровое поле игрока перед повторной расстановкой кораблей
+
 	myArea.cleanField();
 
-	// очищаем клон объекта с набором кораблей
+
 	let initialShipsClone = '';
-	// способ расстановки кораблей на игровом поле
+
 	const type = e.target.dataset.target;
 	
-	// создаём литеральный объект typeGeneration
-	// каждому свойству литерального объекта соответствует функция
-	// в которой вызывается рандомная или ручная расстановка кораблей
+
 	const typeGeneration = {
 		random() {
-			// скрываем контейнер с кораблями, предназначенными для перетаскивания
-			// на игровое поле
+
 			shipsCollection.hidden = true;
-			// вызов ф-ии рандомно расставляющей корабли для экземпляра игрока
+
 			myArea.randomLocation();
 		},
 		manually() {
-			// определяем видимость набора кораблей
+
 			let value = !shipsCollection.hidden;
 
-			// если в контейнере, кроме информационной строки, находится набор
-			// кораблей, то удаляем его
 			if (shipsCollection.children.length > 1) {
 				shipsCollection.removeChild(shipsCollection.lastChild);
 			}
 
-			// если набор кораблей при клике на псевдоссылку был невидим, то
-			// клнируем его, переносим в игровой контейнер и выводим на экран
 			if (!value) {
 
 				initialShipsClone = initialShips.cloneNode(true);
@@ -515,29 +492,24 @@ document.getElementById('type_placement').addEventListener('click', function (e)
 				initialShipsClone.hidden = false;
 			}
 
-			// в зависимости от полученного значения value показываем или скрываем
-			// блок с набором кораблей
 			shipsCollection.hidden = value;
 
 		}
 	};
-	// вызов функции литерального объекта в зависимости
-	// от способа расстановки кораблей
+
 	typeGeneration[type]();
 
-	// создаём экземпляр класса, отвечающего за перетаскивание
-	// и редактирование положения кораблей
 	const placement = new Placement();
-	// устанавливаем обработчики событий
+
 	placement.setObserver();
 });
 class Placement {
-	// объект с координатами стророн игрового поля
+
 
 	constructor() {
-		// объект перетаскивамого корабля
+
 		this.dragObject = {};
-		// флаг нажатия на левую кнопку мыши
+
 		this.pressed = false;
 		this.areaCoords = getCoordinate(myArea_field);
 	}
@@ -561,42 +533,36 @@ class Placement {
 	onMouseDown(EO) {
 		EO = EO || window.event;
 		this.areaCoords = getCoordinate(myArea_field);
-		// если нажата не левая кнопка мыши или игра уже запущена
+
 
 		let mouseTouch = EO.which == 1 || EO.type == "touchstart";
 		EO.preventDefault();
 		if (!mouseTouch || flagStart) return;
 
-
-
-		// проверяем, что нажатие произошло над кораблём
 		const el = EO.target.closest('.ship');
 		if (!el) return;
 
 		this.pressed = true;
 
-		// переносимый объект и его свойства
 		this.dragObject = {
 			el,
 			parent: el.parentElement,
 			next: el.nextElementSibling,
-			// координаты, с которых начат перенос
+
 			downX: EO.pageX || EO.targetTouches[0].clientX,
 			downY: EO.pageY || EO.targetTouches[0].clientY,
-			// координаты 'left' и 'top' используются при редактировании
-			// положения корабля на игровом поле
+
 			left: el.offsetLeft,
 			top: el.offsetTop,
-			// горизонтальное положение корабля
+
 			ky: 0,
 			kx: 1
 		};
 
-		// редактируем положение корабля на игровом поле
-		// проверяем, что корабль находится на поле игрока
+
 		if (el.parentElement === myArea_field) {
 			const name = el.id;
-			// запоминаем текущее направление расположения палуб
+
 			this.dragObject.ky = myArea.infoship[name].ky;
 			this.dragObject.kx = myArea.infoship[name].kx;
 		}
@@ -609,7 +575,6 @@ class Placement {
 		if (!this.pressed || !this.dragObject.el) return;
 		e.preventDefault();
 
-		// получаем координаты сторон клона корабля
 		let {
 			left,
 			right,
@@ -617,49 +582,43 @@ class Placement {
 			bottom
 		} = getCoordinate(this.dragObject.el);
 
-		// если клона ещё не существует, создаём его
+
 		if (!this.clone) {
-			// получаем количество палуб у перемещаемого корабля
+
 			this.kolpalub = Placement.getCloneDecks(this.dragObject.el);
-			// создаём клон, используя ранее полученные координаты его сторон
+
 			this.clone = this.creatClone({
 				left,
 				right,
 				top,
 				bottom
 			}) || null;
-			// если по каким-то причинам клон создать не удалось, выходим из функции
+
 			if (!this.clone) return;
 
-			// вычисляем сдвиг курсора по координатам X и Y
 			this.shiftX = this.dragObject.downX - left;
 			this.shiftY = this.dragObject.downY - top;
-			// z-index нужен для позиционирования клона над всеми элементами DOM
+
 			this.clone.style.zIndex = '1000';
-			// перемещаем клон в BODY
+
 			document.body.appendChild(this.clone);
 
-			// удаляем устаревший экземпляр корабля, если он существует
-			// используется при редактировании положения корабля
+
 			this.removeShipFromInfo(this.clone);
 		}
 
-		// координаты клона относительно BODY с учётом сдвига курсора
-		// относительно верней левой точки
+
 		let newX=e.pageX || e.targetTouches[0].clientX;
 		let newY=e.pageY || e.targetTouches[0].clientY;
 		let currentLeft = Math.round(newX - this.shiftX),
 			currentTop = Math.round(newY - this.shiftY);
-			/* console.log(e.targetTouches[0].screenX+" 1 "+e.targetTouches[0].screenY)
-			console.log(this.shiftX+" 3 "+this.shiftY) */
+
 		this.clone.style.left = `${currentLeft}px`;
 		this.clone.style.top = `${currentTop}px`;
 
-		// проверяем, что клон находится в пределах игрового поля, с учётом
-		// небольших погрешностей (14px)
+
 		if (left >= this.areaCoords.left - myVar*1.607 && right <= this.areaCoords.right + myVar*1.607 && top >= this.areaCoords.top - myVar*1.607 && bottom <= this.areaCoords.bottom + myVar*3) {
-			// клон находится в пределах игрового поля,
-			// подсвечиваем его контур зелёным цветом
+
 			this.clone.classList.remove('unsuccess');
 			this.clone.classList.add('success');
 
@@ -682,83 +641,67 @@ class Placement {
 			const result = myArea.check(obj, this.kolpalub);
 
 			if (!result) {
-				// в соседних клетках находятся ранее установленные корабли,
-				// подсвечиваем его контур красным цветом
+
 				this.clone.classList.remove('success');
 				this.clone.classList.add('unsuccess');
 			}
 		} else {
-			// клон находится за пределами игрового поля,
-			// подсвечиваем его контур красным цветом
+
 			this.clone.classList.remove('success');
 			this.clone.classList.add('unsuccess');
 		}
-		console.log(myArea.matrix)
+
 	}
 
 	onMouseUp(e) {
 		this.pressed = false;
-		// если клона не существует
 		if (!this.clone) return;
 
-		// если координаты клона невалидны, возвращаем его на место,
-		// откуда был начат перенос
 		if (this.clone.classList.contains('unsuccess')) {
 			this.clone.classList.remove('unsuccess');
 			sound.mustnot();
 			this.clone.rollback();
 		} else {
-			// создаём экземпляр нового корабля, исходя
-			// из окончательных координат клона 
 			this.createShipAfterMoving();
 		}
 
-		// удаляем объекты 'clone' и 'dragObject'
 		this.removeClone();
-		console.log(myArea.matrix)
+
 	}
 
 	rotationShip(e) {
-		// запрещаем появление контекстного меню
 		e.preventDefault();
 		if (e.which != 3 || flagStart) return;
 
 		const el = e.target.closest('.ship');
 		const name = el.id;
 
-		// нет смысла вращать однопалубный корабль
 		if (myArea.infoship[name].kolpalub == 1) return;
 
-		// объект с текущими коэффициентами и координатами корабля
 		const obj = {
 			ky: (myArea.infoship[name].ky == 0) ? 1 : 0,
 			kx: (myArea.infoship[name].kx == 0) ? 1 : 0,
 			x: myArea.infoship[name].x,
 			y: myArea.infoship[name].y
 		};
-		// очищаем данные о редактируемом корабле
 		const kolpalub = myArea.infoship[name].arrkolpalub.length;
 		this.removeShipFromInfo(el);
 		myArea.field.removeChild(el);
 
-		// проверяем валидность координат после поворота
-		// если координаты не валидны, возвращаем старые коэффициенты
-		// направления положения корабля
 		const result = myArea.check(obj, kolpalub);
 		if (!result) {
 			obj.ky = (obj.ky == 0) ? 1 : 0;
 			obj.kx = (obj.kx == 0) ? 1 : 0;
 		}
 
-		// добавляем в объект свойства нового корабля
 		obj.shipname = name;
 		obj.kolpalub = kolpalub;
 
-		// создаём экземпляр нового корабля
+
 		const ship = new Ship(myArea, obj);
 		ship.showShip();
 
-		// кратковременно подсвечиваем рамку корабля красным цветом
+
 		if (!result) {
 			const el = document.getElementById(name);
 			el.classList.add('unsuccess');
@@ -774,9 +717,7 @@ class Placement {
 		const oldPosition = this.dragObject;
 
 		clone.rollback = () => {
-			// редактиование положения корабля
-			// получаем родительский элемент и
-			// возвращаем корабль на исходное место на игровом поле
+
 			if (oldPosition.parent == myArea_field) {
 				clone.style.left = `${oldPosition.left}px`;
 				clone.style.top = `${oldPosition.top}px`;
@@ -784,7 +725,7 @@ class Placement {
 				oldPosition.parent.insertBefore(clone, oldPosition.next);
 				this.createShipAfterMoving();
 			} else {
-				// возвращаем корабль в контейнер 'shipsCollection'
+
 				clone.removeAttribute('style');
 				oldPosition.parent.insertBefore(clone, oldPosition.next);
 			}
@@ -798,7 +739,7 @@ class Placement {
 	}
 
 	createShipAfterMoving() {
-		// получаем координаты, пересчитанные относительно игрового поля
+
 		const coords = getCoordinate(this.clone);
 		let {
 			left,
@@ -808,7 +749,7 @@ class Placement {
 		} = this.getCoordsCloneInMatrix(coords);
 		this.clone.style.left = `${left}px`;
 		this.clone.style.top = `${top}px`;
-		// переносим клон внутрь игрового поля
+
 		myArea_field.appendChild(this.clone);
 		
 		this.clone.classList.remove('success');
@@ -827,7 +768,7 @@ class Placement {
 				
 			}
 		}
-		// создаём объект со свойствами нового корабля
+
 		const options = {
 			shipname: this.clone.id,
 			x,
@@ -837,10 +778,10 @@ class Placement {
 			kolpalub: this.kolpalub
 		};
 
-		// создаём экземпляр нового корабля
+
 		const ship = new Ship(myArea, options);
 		ship.showShip();
-		// теперь в игровом поле находится сам корабль, поэтому его клон удаляем из DOM
+
 		myArea_field.removeChild(this.clone);
 	}
 
@@ -850,47 +791,43 @@ class Placement {
 		top,
 		bottom
 	} = coords) {
-		// вычисляем разницу координат соотвествующих сторон
-		// клона и игрового поля
+
 		let computedLeft = left - this.areaCoords.left,
 			computedRight = right - this.areaCoords.right,
 			computedTop = top - this.areaCoords.top,
 			computedBottom = bottom - this.areaCoords.bottom;
 
-		// создаём объект, куда поместим итоговые значения
+
 		const obj = {};
 
-		// в результате выполнения условия, убираем неточности позиционирования клона
+
 		let ft = (computedTop < 0) ? 0 : (computedBottom > myArea.sizeArea) ? myArea.sizeArea - myArea.sizeShip : computedTop;
 		let fl = (computedLeft < 0) ? 0 : (computedRight > myArea.sizeArea) ? myArea.sizeArea - myArea.sizeShip * this.kolpalub : computedLeft;
 
 		obj.top = Math.round(ft / myArea.sizeShip) * myArea.sizeShip;
 		obj.left = Math.round(fl / myArea.sizeShip) * myArea.sizeShip;
 
-		// переводим значение в координатах матрицы
+
 		
 		obj.y = Math.round(obj.top / myArea.sizeShip);
 		obj.x = Math.round(obj.left / myArea.sizeShip);
-		console.log(obj.y+" "+obj.x);
-		console.log(obj.top+" "+myArea.sizeShip)
+
 		return obj;
 	}
 
 	removeShipFromInfo(el) {
-		// имя редактируемого корабля
+
 		const name = el.id;
-		// если корабля с таким именем не существует,
-		// прекращаем работу функции
+
 		if (!myArea.infoship[name]) return;
 
-		// получаем массив с координатами палуб корабля и
-		// записываем в него нули, что означает - пустое место
+
 		let arr = myArea.infoship[name].arrkolpalub;
 		for (let coords of arr) {
 			const [x, y] = coords;
 			myArea.matrix[x][y] = 0;
 		}
-		// удаляем всю информацию о корабле из массива эскадры
+
 		delete myArea.infoship[name];
 	}
 }
@@ -981,7 +918,7 @@ class Controller {
 		return [y, x];
 	}
 
-	// удаление ненужных координат из массива
+
 	init() {
 		const random = Area.random(1);
 		this.player = (random == 0) ? myArea : pcArea;
@@ -1037,13 +974,12 @@ class Controller {
 		if (icons.length == 0) return true;
 
 		for (let icon of icons) {
-			// получаем координаты иконки и сравниваем их с аргументом функции
+
 			const [x, y] = Controller.getCoordsIcon(icon);
 			if (coords[0] == x && coords[1] == y) {
-				// если координаты иконки и координаты полученные в аргументе совпали,
-				// проверяем, какая функция вызвала функцию checkUselessCell
+
 				if (f == 1) {
-					// удаляем маркер пустой клетки
+
 					for (let keys in myArea.updateInfo) {
 						if (myArea.updateInfo[keys]["field"] == icon) {
 							delete myArea.updateInfo[keys];
@@ -1052,7 +988,7 @@ class Controller {
 					icon.remove();
 
 				} else {
-					// на 0.5s окрашиваем маркер в красный цвет
+
 					icon.classList.add('shaded-cell_red');
 					sound.shaded();
 					setTimeout(() => {
@@ -1065,9 +1001,9 @@ class Controller {
 		return true;
 	}
 	showIcons(enemy, [x, y], iconClass) {
-		// экземпляр игрового поля на котором будет размещена иконка
+
 		const field = enemy.field;
-		// небольшая задержка при формировании иконок промаха и попадания
+
 		if (iconClass === 'dot' || iconClass === 'red-cross') {
 			let i = 1;
 			if(iconClass === 'red-cross'){
@@ -1087,7 +1023,7 @@ class Controller {
 		}
 
 		function fn(i) {
-			// создание элемента и добавление ему класса и стилей
+
 			const span = document.createElement('span');
 			span.className = `icon-field ${iconClass}`;
 			span.style.left = x * myArea.sizeShip + "px";
@@ -1101,7 +1037,7 @@ class Controller {
 				
 			}
 
-			// размещаем иконку на игровом поле
+
 			field.appendChild(span);
 		}
 	}
@@ -1160,11 +1096,11 @@ class Controller {
 	}
 	miss(x, y) {
 		let text = '';
-		// устанавливаем иконку промаха и записываем промах в матрицу
+
 		this.showIcons(this.enemy, [y, x], 'dot');
 		this.enemy.matrix[x][y] = 3;
 this.player.k=1;
-		// определяем статус игроков
+
 		if (this.player === myArea) {
 			text = 'Вы промахнулись. Стреляет компьютер.';
 			this.player = pcArea;
@@ -1174,7 +1110,7 @@ this.player.k=1;
 		} else {
 			text = 'Компьютер промахнулся. Ваш выстрел.';
 			if (this.coordsArounf.length == 0 && this.temporaryShip.hits > 0) {
-				// корабль потоплен, отмечаем useless cell вокруг него
+
 				this.markUselessCellAroundShip();
 				this.removeTemporary();
 			}
@@ -1202,7 +1138,6 @@ this.player.k=1;
 				toptext.innerText=`Счет: ${pcArea.score-myArea.score}`;
 				
 				dataShip.life--;
-				console.log(this.enemy.score);
 				if (dataShip.life > 0) break;
 
 				if (this.enemy === myArea) {
@@ -1229,16 +1164,16 @@ this.player.k=1;
 		} else if (this.enemy === myArea) {
 			let coords;
 			this.temporaryShip.hits++;
-			// отмечаем клетки по диагонали, где точно не может стоять корабль
+
 			coords = [
 				[x - 1, y - 1],
 				[x - 1, y + 1],
 				[x + 1, y - 1],
 				[x + 1, y + 1]
 			];
-			// проверяем и отмечаем полученные координаты клеток
+
 			this.markUselessCell(coords);
-			// формируем координаты обстрела вокруг попадания
+
 			coords = [
 				[x - 1, y],
 				[x + 1, y],
@@ -1248,7 +1183,7 @@ this.player.k=1;
 			this.setCoordsAroundHit(x, y, coords);
 			this.isShipSunk();
 
-			// после небольшой задержки, компьютер делает новый выстрел
+
 			setTimeout(() => this.shot(), 2000);
 
 		}
@@ -1289,7 +1224,7 @@ this.player.k=1;
 	}
 	getCoordsForShot() {
 		const coords = (this.coordsArounf.length > 0) ? this.coordsArounf.pop() : (this.coordrsFixed.length > 0) ? this.coordrsFixed.pop() : this.coordsRandom.pop();
-		// удаляем полученные координаты из всех массивов
+
 		this.removeCoordsFromArrays(coords);
 		return coords;
 	}
@@ -1310,18 +1245,16 @@ this.player.k=1;
 			y = coord[0];
 			x = coord[1];
 
-			// координаты за пределами игрового поля
+
 			if (x < 0 || x > 9 || y < 0 || y > 9) continue;
-			// по этим координатам в матрице уже прописан промах или маркер пустой клетки
+
 			if (myArea.matrix[y][x] == 2 || myArea.matrix[y][x] == 3) continue;
-			// прописываем значение, соответствующее маркеру пустой клетки
+
 			myArea.matrix[y][x] = 2;
-			// вывоим маркеры пустых клеток по полученным координатам
-			// для того, чтобы маркеры выводились поочерёдно, при каждой итерации
-			// увеличиваем задержку перед выводом маркера
+
 
 			this.showIcons(myArea, [x, y], 'shaded-cell');
-			// удаляем полученные координаты из всех массивов
+
 			this.removeCoordsFromArrays([x, y]);
 			n++;
 		}
@@ -1333,26 +1266,25 @@ this.player.k=1;
 			ky
 		} = this.temporaryShip;
 
-		// массив пустой, значит это первое попадание в данный корабль
+
 		if (firstHit.length == 0) {
 			this.temporaryShip.firstHit = [x, y];
-			// второе попадание, т.к. оба коэффициента равны 0
+
 		} else if (kx == 0 && ky == 0) {
-			// зная координаты первого и второго попадания,
-			// можно вычислить направление расположение корабля
+
 			this.temporaryShip.kx = ((firstHit[0] - x) == 0) ? 1 : 0;
 			this.temporaryShip.ky = Math.abs(this.temporaryShip.kx - 1);
 		}
-		// проверяем корректность полученных координат обстрела
+
 		for (let coord of coords) {
 			x = coord[0];
 			y = coord[1];
-			// координаты за пределами игрового поля
+
 
 			if (x < 0 || x > 9 || y < 0 || y > 9) continue;
-			// по данным координатам установлен промах или маркер пустой клетки
+
 			if (myArea.matrix[x][y] != 0 && myArea.matrix[x][y] != 1) continue;
-			// валидные координаты добавляем в массив
+
 			this.coordsArounf.push([y, x]);
 		}
 	}
@@ -1368,7 +1300,7 @@ this.player.k=1;
 		}
 	}
 	markUselessCellAroundShip() {
-		// присваиваем переменным соответствующие значения из объекта tempShip
+
 		const {
 			hits,
 			kx,
@@ -1379,8 +1311,6 @@ this.player.k=1;
 
 		let coords;
 
-		// рассчитываем координаты пустых клеток
-		// однопалубный корабль
 		if (this.temporaryShip.hits == 1) {
 			coords = [
 				// верхняя
@@ -1410,44 +1340,44 @@ this.player.k=1;
 var sound={
 	fire(){
 		
-			let audio = new Audio(); // Создаём новый элемент Audio
-			audio.src = '../sounds/fire.mp3'; // Указываем путь к звуку "клика"
-			audio.autoplay = true; // Автоматически запускаем	  
+			let audio = new Audio(); 
+			audio.src = '../sounds/fire.mp3'; 
+			audio.autoplay = true; 	  
 	},
 	gameover(){
 		
-		let audio = new Audio(); // Создаём новый элемент Audio
-		audio.src = '../sounds/gameover.mp3'; // Указываем путь к звуку "клика"
-		audio.autoplay = true; // Автоматически запускаем	  
+		let audio = new Audio(); 
+		audio.src = '../sounds/gameover.mp3'; 
+		audio.autoplay = true; 	  
 },
 gamewon(){
 		
-	let audio = new Audio(); // Создаём новый элемент Audio
-	audio.src = '../sounds/game-won.mp3'; // Указываем путь к звуку "клика"
-	audio.autoplay = true; // Автоматически запускаем	  
+	let audio = new Audio(); 
+	audio.src = '../sounds/game-won.mp3'; 
+	audio.autoplay = true; 
 },
 pencil(){
 		
-	let audio = new Audio(); // Создаём новый элемент Audio
-	audio.src = '../sounds/pencil.mp3'; // Указываем путь к звуку "клика"
-	audio.autoplay = true; // Автоматически запускаем	  
+	let audio = new Audio(); 
+	audio.src = '../sounds/pencil.mp3'; 
+	audio.autoplay = true;   
 },
 water(){
 		
-	let audio = new Audio(); // Создаём новый элемент Audio
-	audio.src = '../sounds/water.mp3'; // Указываем путь к звуку "клика"
-	audio.autoplay = true; // Автоматически запускаем	  
+	let audio = new Audio(); 
+	audio.src = '../sounds/water.mp3'; 
+	audio.autoplay = true; 	  
 },
 mustnot(){
 		
-	let audio = new Audio(); // Создаём новый элемент Audio
-	audio.src = '../sounds/must_not.mp3'; // Указываем путь к звуку "клика"
-	audio.autoplay = true; // Автоматически запускаем	  
+	let audio = new Audio(); 
+	audio.src = '../sounds/must_not.mp3'; 
+	audio.autoplay = true;   
 },
 shaded(){
-	let audio = new Audio(); // Создаём новый элемент Audio
-	audio.src = '../sounds/shaded_placed.mp3'; // Указываем путь к звуку "клика"
-	audio.autoplay = true; // Автоматически запускаем	
+	let audio = new Audio(); 
+	audio.src = '../sounds/shaded_placed.mp3'; 
+	audio.autoplay = true; 
 }
 
 };
