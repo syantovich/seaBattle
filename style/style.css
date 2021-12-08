@@ -363,7 +363,7 @@ p {
 }
 @keyframes toLeft {
     from{
-        transform: translateX(-50%) ;
+        transform: translateX(50%) ;
         opacity: 0;
     }
     to{
@@ -377,7 +377,7 @@ p {
         opacity: 1;
     }
     to{
-        transform: translateX(-50%);
+        transform: translateX(50%);
         opacity: 0;
     }
 }
