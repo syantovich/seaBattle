@@ -1,8 +1,4 @@
-/*! Hammer.JS - v2.0.8 - 2016-04-23
- * http://hammerjs.github.io/
- *
- * Copyright (c) 2016 Jorik Tangelder;
- * Licensed under the MIT license */
+
 ! function (a, b, c, d) {
     "use strict";
 
@@ -996,4 +992,3 @@
         return ha
     }) : "undefined" != typeof module && module.exports ? module.exports = ha : a[c] = ha
 }(window, document, "Hammer");
-//# sourceMappingURL=hammer.min.js.map

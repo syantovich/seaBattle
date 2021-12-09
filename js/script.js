@@ -1,4 +1,5 @@
 "use strict"
+
 var myVar;
 var rec = [];
 let flagRec = true;
@@ -536,6 +537,9 @@ hammertimeSwipe.on('swipe', function (ev) {
 				if (el.parentElement === myArea_field) {
 					const name = el.id;
 
+
+					console.log(this.dragObject);
+					console.log(myArea);
 					this.dragObject.ky = myArea.infoship[name].ky;
 					this.dragObject.kx = myArea.infoship[name].kx;
 				}
