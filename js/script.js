@@ -1,6 +1,6 @@
 "use strict"
 console.log(document.querySelectorAll(".nn"));
-
+location.hash=encodeURIComponent("menu");
   window.onhashchange=switchToStateFromURLHash;
 let SPAState;
 console.log(document.querySelectorAll(".nn"));
