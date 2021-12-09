@@ -69,6 +69,80 @@ body {
     font: normal calc(var(--myvar) * 2.067) Playfair Display;
     line-height: calc(var(--myvar) * 2.755);
     color: #b9001f;
+
+}
+#menuShow div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:column;
+}
+#menuShow button{
+    margin-bottom: calc(var(--myvar) * 2.755);;
+    font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: calc(var(--myvar) * 2.755);
+    color: #b9001f;
+    width: calc(var(--myvar) * 20) ;
+    height: calc(var(--myvar) * 5) ;
+    border: black 1px solid;
+    border-radius:30%;
+}
+
+#menuShow{
+position: absolute;
+top: 0px;
+left:0px;
+
+    justify-content: center;
+    align-items:center;
+    background-color:rgb(55, 166, 194);
+    width:100vw;
+    height: 100vh;
+    display: none;
+}
+#menuShow{
+    display: flex   ;
+}
+#gameShow{
+    display: none;
+    width:100vw;
+    height: 100vh;
+    position: absolute;
+top: 0px;
+left:0px;
+}
+#ruleShow {
+    display: none;
+    position: absolute;
+top: 0px;
+left:0px;
+    width:100vw;
+    height: 100vh;
+    padding: 10%;
+    width: 100%;
+    z-index: 3000;
+    background-color: rgb(55, 166, 194);
+    font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: calc(var(--myvar) * 2.755);
+    color: #b9001f;
+    text-align: justify;
+
+}
+#recordsShow{
+    justify-content: space-between;
+    align-items:center;
+    background-color:rgb(55, 166, 194);
+    padding-top: 10%;
+    padding-bottom: 10%;
+    flex-direction:column;
+    position: absolute;
+top: 0px;
+left:0px;
+width:100vw;
+height: 100vh;
+
+}
+#ruleShow h4{
+    text-align: center;
 }
 
 p {
@@ -105,8 +179,7 @@ p {
     width: 100vw;
     height: 100vh;
     position: relative;
-    background: url('../img/sea.jpg');
-    background-size: 100%;
+    background: rgb(55, 166, 194);
 }
 
 .text-top {

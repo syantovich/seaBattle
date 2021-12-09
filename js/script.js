@@ -1,4 +1,54 @@
 "use strict"
+console.log(document.querySelectorAll(".nn"));
+
+  window.onhashchange=switchToStateFromURLHash;
+let SPAState;
+console.log(document.querySelectorAll(".nn"));
+  function switchToStateFromURLHash() {
+    var URLHash=window.location.hash;
+
+    // убираем из закладки УРЛа решётку
+    // (по-хорошему надо ещё убирать восклицательный знак, если есть)
+    var stateStr=URLHash.substr(1);
+
+    if ( stateStr!="" ) { // если закладка непустая, читаем из неё состояние и отображаем
+		SPAState=stateStr; // для фото нужна ещё вторая часть закладки - номер фото
+    }
+    else{SPAState='menu';} // иначе показываем главную страницу}
+	console.log(SPAState);
+    console.log('Новое состояние приложения:');
+	document.getElementById("menuShow").style.display="none";
+	document.getElementById("gameShow").style.display="none";
+	document.getElementById("ruleShow").style.display="none";
+	document.getElementById("recordsShow").style.display="none";
+    // обновляем вариабельную часть страницы под текущее состояние
+	
+    switch ( SPAState ) {
+      case 'menu':
+        document.getElementById("menuShow").style.display="flex";
+        break;
+      case 'game':
+        document.getElementById("gameShow").style.display="flex";
+        break;
+      case 'rule':
+        document.getElementById("ruleShow").style.display="block";
+        break;
+		case 'records':
+		document.getElementById("recordsShow").style.display="flex";
+        break;
+		default:
+			console.log(1);
+			break;
+    }
+
+  }
+
+  function switchToState(el) {
+	let newHash=el.id.slice(0,-1);
+	console.log(newHash);
+    location.hash=encodeURIComponent(newHash);
+  }
+
 
 var myVar;
 var rec = [];
@@ -9,11 +59,15 @@ var hammertimeSwipe = new Hammer(wrap);
 hammertimeSwipe.get('swipe').set({
 	direction: Hammer.DIRECTION_ALL
 });
-
+document.getElementById("menuShow").querySelectorAll("button").forEach(e=>{
+e.addEventListener("click",()=>{switchToState(e);});
+});
 
 function records() {
 	let divRec = document.querySelector("#rec");
 	divRec.innerHTML = "";
+	let divRecShow=document.querySelector("#recordsShow");
+	divRecShow.innerHTML = "";
 	let name = document.createElement("div");
 	name.innerText = "Таблица рекордов";
 	divRec.appendChild(name);
@@ -21,6 +75,12 @@ function records() {
 		let newDiv = document.createElement("div");
 		newDiv.innerText = `${i+1}. Имя:${rec[i].name} Количество очков:${rec[i].value}`;
 		divRec.appendChild(newDiv);
+	}
+	divRecShow.appendChild(name);
+	for (let i = 0; i < rec.length; i++) {
+		let newDiv = document.createElement("div");
+		newDiv.innerText = `${i+1}. Имя:${rec[i].name} Количество очков:${rec[i].value}`;
+		divRecShow.appendChild(newDiv);
 	}
 }
 var ajaxHandlerScript = "http://fe.it-academy.by/TestAjax2.php";
@@ -48,33 +108,13 @@ function fetchrRec() {
 		});
 }
 fetchrRec();
-
 hammertimeSwipe.on('swipe', function (ev) {
 
 	ev.preventDefault();
 
-			let divRec = document.querySelector("#rec"),
-				divRul = document.querySelector("#rul");
+			let divRec = document.querySelector("#rec");
 			let direc = ev.direction;
 			switch (direc) {
-				case 16: {
-					divRul.classList.remove("firstL");
-					divRul.style.display = "block";
-					divRul.classList.add("d");
-					divRul.classList.remove("u");
-				}
-				break;
-			case 8: {
-				if (divRul.className != "firstL") {
-
-					divRul.classList.add("u");
-					divRul.classList.remove("d");
-					setTimeout(() => {
-						divRul.style.display = "none";
-					}, 1020);
-				}
-			}
-			break;
 			case 4: {
 				if (divRec.className != "firstR") {
 					divRec.classList.add("l");
@@ -405,7 +445,6 @@ hammertimeSwipe.on('swipe', function (ev) {
 			e.target.hidden = true;
 			instruction.hidden = true;
 			pcArea_field.parentElement.hidden = false;
-			toptext.style.backgroundColor = "white";
 			toptext.innerHTML = 'Счет: 0';
 			pcArea = new Area(pcArea_field);
 			pcArea.cleanField();
