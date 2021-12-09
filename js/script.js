@@ -1,6 +1,6 @@
 "use strict"
 console.log(document.querySelectorAll(".nn"));
-location.hash=encodeURIComponent("menu");
+
   window.onhashchange=switchToStateFromURLHash;
 let SPAState;
 console.log(document.querySelectorAll(".nn"));
@@ -42,6 +42,7 @@ console.log(document.querySelectorAll(".nn"));
     }
 
   }
+  switchToStateFromURLHash();
 
   function switchToState(el) {
 	let newHash=el.id.slice(0,-1);
@@ -55,10 +56,14 @@ var rec = [];
 let flagRec = true;
 let kInfo = 1;
 let wrap= document.querySelector(".wrap");
-var hammertimeSwipe = new Hammer(wrap);
-hammertimeSwipe.get('swipe').set({
-	direction: Hammer.DIRECTION_ALL
+var hammertimeSwipeH = new Hammer(wrap);
+hammertimeSwipeH.get('swipe').set({
+	direction: Hammer.DIRECTION_HORIZONTAL
 });
+var hammertimeSwipeV = new Hammer(wrap);
+				hammertimeSwipeV.get('swipe').set({
+					direction: Hammer.DIRECTION_VERTICAL
+				});
 document.getElementById("menuShow").querySelectorAll("button").forEach(e=>{
 e.addEventListener("click",()=>{switchToState(e);});
 });
@@ -108,7 +113,7 @@ function fetchrRec() {
 		});
 }
 fetchrRec();
-hammertimeSwipe.on('swipe', function (ev) {
+hammertimeSwipeH.on('swipe', function (ev) {
 
 	ev.preventDefault();
 
@@ -154,6 +159,8 @@ hammertimeSwipe.on('swipe', function (ev) {
 		let flagController = false;
 
 		let flagPcShots = true;
+
+		let flagListener=false;
 
 		let myArea_field = document.querySelector("#myArea");
 
@@ -519,6 +526,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 			}
 			setObserver() {
 				if (flagHandPos) return;
+				if(flagListener)return;
 				document.addEventListener('mousedown', this.onMouseDown.bind(this));
 				document.addEventListener('mousemove', this.onMouseMove.bind(this));
 				document.addEventListener('mouseup', this.onMouseUp.bind(this));
@@ -526,20 +534,14 @@ hammertimeSwipe.on('swipe', function (ev) {
 				document.addEventListener('touchmove', this.onMouseMove.bind(this));
 				document.addEventListener('touchend', this.onMouseUp.bind(this));
 				myArea_field.addEventListener('contextmenu', this.rotationShip.bind(this));
-				var mc = new Hammer.Manager(myArea_field);
-				mc.add(new Hammer.Swipe({
-					event: 'a',
-					pointers: 2,
-					direction: 2
-				}));
-
-
-				mc.on("a", function (ev) {
-					alert("left 2");
+				hammertimeSwipeV.on("swipe", (EO) => {
+					console.log(2);
+					console.log(EO)
+					let el = this.lastName	;
+					if(!el)return;
+					this.rotationShip.bind(this)(EO);
 				});
-				var hammertimeRotate = new Hammer(myArea_field);
-				hammertimeRotate.on('doubletap', this.rotationShip.bind(this));
-				flagHandPos = true;
+				flagListener=true;
 			}
 
 			onMouseDown(EO) {
@@ -549,7 +551,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 
 				let mouseTouch = EO.which == 1 || EO.type == "touchstart";
 				EO.preventDefault();
-				if(!mouseTouch) this.dragObject={};
+				if(!mouseTouch) this.lastName="";
 				if (!mouseTouch || flagStart) return;
 
 				const el = EO.target.closest('.ship');
@@ -680,17 +682,18 @@ hammertimeSwipe.on('swipe', function (ev) {
 				} else {
 					this.createShipAfterMoving();
 				}
-
+				console.log(this.clone);
+				this.lastName=this.clone.id;
 				this.removeClone();
-				console.log(this.dragObject);
+				console.log(this.lastName);
 			}
 
 			rotationShip(e) {
 				e.preventDefault();
-				let ft= e.which == 3||  e.type=="doubletap";
+				let ft= e.which == 3||  e.type=="swipe";
 				if (!ft || flagStart) return;
 
-				const el = e.target.closest('.ship');
+				const el = e.target.closest('.ship')||document.getElementById(`${this.lastName}`);
 				const name = el.id;
 
 				if (myArea.infoship[name].kolpalub == 1) return;
@@ -751,6 +754,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 			}
 
 			removeClone() {
+				this.dragObject={};
 				delete this.clone;
 			}
 
