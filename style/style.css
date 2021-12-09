@@ -230,6 +230,9 @@ p {
     height: calc(var(--myvar) * 4.018);
     position: absolute;
 }
+.ships-collection{
+    width:calc(var(--myvar) * 57.405);
+}
 
 .vertical {
     transform: rotate(90deg);
