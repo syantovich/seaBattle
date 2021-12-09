@@ -1,9 +1,9 @@
 "use strict"
-console.log(document.querySelectorAll(".nn"));
+
 
   window.onhashchange=switchToStateFromURLHash;
 let SPAState;
-console.log(document.querySelectorAll(".nn"));
+
   function switchToStateFromURLHash() {
     var URLHash=window.location.hash;
 
@@ -15,8 +15,7 @@ console.log(document.querySelectorAll(".nn"));
 		SPAState=stateStr; // для фото нужна ещё вторая часть закладки - номер фото
     }
     else{SPAState='menu';} // иначе показываем главную страницу}
-	console.log(SPAState);
-    console.log('Новое состояние приложения:');
+
 	document.getElementById("menuShow").style.display="none";
 	document.getElementById("gameShow").style.display="none";
 	document.getElementById("ruleShow").style.display="none";
@@ -36,9 +35,7 @@ console.log(document.querySelectorAll(".nn"));
 		case 'records':
 		document.getElementById("recordsShow").style.display="flex";
         break;
-		default:
-			console.log(1);
-			break;
+
     }
 
   }
@@ -46,7 +43,6 @@ console.log(document.querySelectorAll(".nn"));
 
   function switchToState(el) {
 	let newHash=el.id.slice(0,-1);
-	console.log(newHash);
     location.hash=encodeURIComponent(newHash);
   }
 let rulseicon=document.getElementById("rulei");
@@ -130,7 +126,7 @@ function checkRec(score) {
 			.then(response => response.json())
 			.then(data => {
 				rec = JSON.parse(data.result);
-				console.log();
+
 				delete rec[0].score;
 				rec[0].value=2640;
 				records();
@@ -166,7 +162,7 @@ function checkRec(score) {
 			.then(response => response)
 			.then(data => {
 				console.log("Успешно");
-				console.log(data);
+
 			})
 			.catch(error => {
 				alert("Неудалось загрузить данные. Попробую еще раз чере минутку");
@@ -599,8 +595,7 @@ hammertimeSwipeH.on('swipe', function (ev) {
 				document.addEventListener('touchend', this.onMouseUp.bind(this));
 				myArea_field.addEventListener('contextmenu', this.rotationShip.bind(this));
 				hammertimeSwipeV.on("swipe", (EO) => {
-					console.log(2);
-					console.log(EO)
+
 					let el = this.lastName	;
 					if(!el)return;
 					this.rotationShip.bind(this)(EO);
@@ -643,8 +638,7 @@ hammertimeSwipeH.on('swipe', function (ev) {
 					const name = el.id;
 
 
-					console.log(this.dragObject);
-					console.log(myArea);
+
 					this.dragObject.ky = myArea.infoship[name].ky;
 					this.dragObject.kx = myArea.infoship[name].kx;
 				}
@@ -746,10 +740,10 @@ hammertimeSwipeH.on('swipe', function (ev) {
 				} else {
 					this.createShipAfterMoving();
 				}
-				console.log(this.clone);
+
 				this.lastName=this.clone.id;
 				this.removeClone();
-				console.log(this.lastName);
+
 			}
 
 			rotationShip(e) {
@@ -1373,10 +1367,10 @@ hammertimeSwipeH.on('swipe', function (ev) {
 			isShipSunk() {
 				let max = 0;
 				for (let keys in myArea.infoship) {
-					console.log(myArea.infoship[keys]);
+
 					max = Math.max(myArea.infoship[keys].arrkolpalub.length, max);
 				}
-				console.log(this.temporaryShip.hits+" "+ max);
+
 				if (this.temporaryShip.hits >= max || this.coordsArounf.length == 0) {
 					this.markUselessCellAroundShip();
 					this.coordsArounf = [];
