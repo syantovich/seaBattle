@@ -1373,8 +1373,10 @@ hammertimeSwipeH.on('swipe', function (ev) {
 			isShipSunk() {
 				let max = 0;
 				for (let keys in myArea.infoship) {
-					max = Math.max(myArea.infoship[keys].kolpalub, max);
+					console.log(myArea.infoship[keys]);
+					max = Math.max(myArea.infoship[keys].arrkolpalub.length, max);
 				}
+				console.log(this.temporaryShip.hits+" "+ max);
 				if (this.temporaryShip.hits >= max || this.coordsArounf.length == 0) {
 					this.markUselessCellAroundShip();
 					this.coordsArounf = [];
