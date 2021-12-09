@@ -486,6 +486,18 @@ hammertimeSwipe.on('swipe', function (ev) {
 				document.addEventListener('touchmove', this.onMouseMove.bind(this));
 				document.addEventListener('touchend', this.onMouseUp.bind(this));
 				myArea_field.addEventListener('contextmenu', this.rotationShip.bind(this));
+				var myArea_field = document.getElementById('pad');
+				var mc = new Hammer.Manager(myArea_field);
+				mc.add(new Hammer.Swipe({
+					event: 'a',
+					pointers: 2,
+					direction: 2
+				}));
+
+
+				mc.on("a", function (ev) {
+					alert("left 2");
+				});
 				var hammertimeRotate = new Hammer(myArea_field);
 				hammertimeRotate.on('doubletap', this.rotationShip.bind(this));
 				flagHandPos = true;
@@ -498,6 +510,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 
 				let mouseTouch = EO.which == 1 || EO.type == "touchstart";
 				EO.preventDefault();
+				if(!mouseTouch) this.dragObject={};
 				if (!mouseTouch || flagStart) return;
 
 				const el = EO.target.closest('.ship');
@@ -627,7 +640,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 				}
 
 				this.removeClone();
-
+				console.log(this.dragObject);
 			}
 
 			rotationShip(e) {
@@ -697,7 +710,6 @@ hammertimeSwipe.on('swipe', function (ev) {
 
 			removeClone() {
 				delete this.clone;
-				this.dragObject = {};
 			}
 
 			createShipAfterMoving() {
