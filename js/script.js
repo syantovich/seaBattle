@@ -49,8 +49,10 @@ console.log(document.querySelectorAll(".nn"));
 	console.log(newHash);
     location.hash=encodeURIComponent(newHash);
   }
-
-
+let rulseicon=document.getElementById("rulei");
+let recordsi=document.getElementById("recordsi");
+rulseicon.addEventListener("click",()=>switchToState(rulseicon));
+recordsi.addEventListener("click",()=>switchToState(recordsi));
 var myVar;
 var rec = [];
 let flagRec = true;
