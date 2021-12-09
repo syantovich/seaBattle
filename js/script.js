@@ -486,7 +486,6 @@ hammertimeSwipe.on('swipe', function (ev) {
 				document.addEventListener('touchmove', this.onMouseMove.bind(this));
 				document.addEventListener('touchend', this.onMouseUp.bind(this));
 				myArea_field.addEventListener('contextmenu', this.rotationShip.bind(this));
-				var myArea_field = document.getElementById('pad');
 				var mc = new Hammer.Manager(myArea_field);
 				mc.add(new Hammer.Swipe({
 					event: 'a',
