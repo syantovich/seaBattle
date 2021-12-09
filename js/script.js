@@ -487,7 +487,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 				document.addEventListener('touchend', this.onMouseUp.bind(this));
 				myArea_field.addEventListener('contextmenu', this.rotationShip.bind(this));
 				var hammertimeRotate = new Hammer(myArea_field);
-				hammertimeRotate.on('press', this.rotationShip.bind(this));
+				hammertimeRotate.on('doubletap', this.rotationShip.bind(this));
 				flagHandPos = true;
 			}
 
@@ -620,7 +620,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 
 				if (this.clone.classList.contains('unsuccess')) {
 					this.clone.classList.remove('unsuccess');
-					sound.mustnot();
+					sound.must();
 					this.clone.rollback();
 				} else {
 					this.createShipAfterMoving();
@@ -632,7 +632,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 
 			rotationShip(e) {
 				e.preventDefault();
-				let ft= e.which == 3||  e.type=="press";
+				let ft= e.which == 3||  e.type=="doubletap";
 				if (!ft || flagStart) return;
 
 				const el = e.target.closest('.ship');
@@ -667,7 +667,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 				if (!result) {
 					const el = document.getElementById(name);
 					el.classList.add('unsuccess');
-					sound.must_not();
+					sound.must();
 					setTimeout(() => {
 						el.classList.remove('unsuccess');
 					}, 750);
@@ -1329,7 +1329,7 @@ hammertimeSwipe.on('swipe', function (ev) {
 				audio.src = '../sounds/water.mp3';
 				audio.autoplay = true;
 			},
-			mustnot() {
+			must() {
 
 				let audio = new Audio();
 				audio.src = '../sounds/must_not.mp3';
