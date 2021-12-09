@@ -112,6 +112,68 @@ function fetchrRec() {
 			setTimeout(fetchrRec, 61000);
 		});
 }
+function checkRec(score) {
+	let sp = new URLSearchParams();
+	sp.append('f', 'LOCKGET');
+	sp.append('n', 'SYANTOVICH_SEABATLE_RECORDS');
+	sp.append("p",pass);
+
+
+
+	function load(score) {
+		fetch(ajaxHandlerScript, {
+				method: 'post',
+				body: sp
+			})
+			.then(response => response.json())
+			.then(data => {
+				rec = JSON.parse(data.result);
+				console.log();
+				delete rec[0].score;
+				rec[0].value=2640;
+				records();
+				checkScore();
+	
+			})
+			.catch(error => {
+				alert("Неудалось загрузить данные. Попробую еще раз чере минутку");
+				setTimeout(load, 61000);
+			});
+	}
+	function checkScore(score){
+		for(let i=0;i<rec.length;i++){
+			if(rec[i].value<scrore){
+				rec.splice(i,0,{name:prompt("Введите ваше имя"),value:scrore});
+				rec.pop();
+				records();
+				break;
+			}
+		}
+		unload();
+	}
+	function unload(){
+		let sd = new URLSearchParams();
+		sd.append('f', 'UPDATE');
+		sd.append('n', 'SYANTOVICH_SEABATLE_RECORDS');
+		sd.append("p",pass);
+		sd.append("v",JSON.stringify(rec));
+		fetch(ajaxHandlerScript, {
+				method: 'post',
+				body: sd
+			})
+			.then(response => response)
+			.then(data => {
+				console.log("Успешно");
+				console.log(data);
+			})
+			.catch(error => {
+				alert("Неудалось загрузить данные. Попробую еще раз чере минутку");
+				setTimeout(unload, 61000);
+			});
+	}
+	load();
+	
+}
 fetchrRec();
 hammertimeSwipeH.on('swipe', function (ev) {
 
@@ -1170,10 +1232,9 @@ hammertimeSwipeH.on('swipe', function (ev) {
 				if (Object.keys(this.enemy.infoship).length == 0) {
 					if (this.enemy === myArea) {
 						text = 'К сожалению, вы проиграли.';
-						for (let name in pcArea.infoship) {
-							const infoOneShip = pcArea.infoship[name];
-							Ship.showShip(pcArea, name, infoOneShip.x, infoOneShip.y, infoOneShip.kx);
-						}
+						sound.gameover();
+						checkRec(pcArea.score-myArea.score);
+						
 					} else {
 						text = 'Поздравляем! Вы выиграли!';
 					}
