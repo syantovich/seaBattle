@@ -742,7 +742,7 @@ g .off{
     display: none;
 }
 #icons{
-    z-index: 2000;
+    z-index: 4000;
     position: absolute;
     display: -webkit-box;
     display: -webkit-flex;
@@ -752,11 +752,11 @@ g .off{
     left: -webkit-calc(var(--myvar) *  4);
 
     left: calc(var(--myvar) *  4);
-    top: -webkit-calc(var(--myvar)*70);
-    top: calc(var(--myvar)*70);
+    bottom: -webkit-calc(var(--myvar)*4);
+    bottom: calc(var(--myvar)*4);
     overflow: hidden;
 }
-#menuicon{
+#menui{
     z-index: 2;
     -webkit-transition:-webkit-transform 0.5s linear;
     transition:-webkit-transform 0.5s linear;
@@ -768,7 +768,7 @@ g .off{
     left: -webkit-calc(var(--myvar) * 0);
     left: calc(var(--myvar) * 0);
 }
-#icons:hover #menuicon{
+#icons:hover #menui{
     -webkit-transform: rotate(90deg);
         -ms-transform: rotate(90deg);
             transform: rotate(90deg);
@@ -776,8 +776,7 @@ g .off{
 #iconsMenu{
     z-index: 0;
     position: relative;
-    left:-webkit-calc(var(--myvar) * -50);
-    left:calc(var(--myvar) * -50);
+    left:-100%;
     -webkit-transition:left 0.5s linear;
     -o-transition:left 0.5s linear;
     transition:left 0.5s linear;

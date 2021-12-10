@@ -51,6 +51,8 @@ window.addEventListener("load",()=>{
 	let rulseicon = document.getElementById("rulei");
 	let recordsi = document.getElementById("recordsi");
 	let music = document.getElementById("musicicon");
+	let menui=document.getElementById("menui");
+	let gamei=document.getElementById("gamei");
 	music.addEventListener("click", () => {
 		flagSoundOn = !flagSoundOn;
 		let on = music.querySelector(".on");
@@ -66,8 +68,9 @@ window.addEventListener("load",()=>{
 	
 	rulseicon.addEventListener("click", () => switchToState(rulseicon));
 	recordsi.addEventListener("click", () => switchToState(recordsi));
-	
-	
+	gamei.addEventListener("click", () => switchToState(gamei));
+	menui.addEventListener("click", () => switchToState(menui));
+
 	var myVar;
 	var rec = [];
 	let flagRec = true;
