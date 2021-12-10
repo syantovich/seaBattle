@@ -1297,6 +1297,7 @@ window.addEventListener("load",()=>{
 	
 				} else {
 					text = 'Поздравляем! Вы выиграли!Нажмите продолжить для дальнейшей игры!';
+					sound.gamewon();
 					pcWin = false;
 					myArea.score = myArea.score - pcArea.score;
 					buttonNewGame.hidden = false;
