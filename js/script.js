@@ -63,6 +63,8 @@ music.addEventListener("click",()=>{
 
 rulseicon.addEventListener("click",()=>switchToState(rulseicon));
 recordsi.addEventListener("click",()=>switchToState(recordsi));
+
+
 var myVar;
 var rec = [];
 let flagRec = true;
@@ -1524,3 +1526,11 @@ hammertimeSwipeH.on('swipe', function (ev) {
 			}
 
 		};
+		window.addEventListener("beforeunload",(e)=>{
+			e=e||window.event;
+			if(Object.keys(myArea.infoship).length){
+				e.returnValue ="Ваш прогресс не сохраниться ,вы уверены выйти?";
+			}
+			
+	   
+		});
