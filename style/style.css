@@ -61,30 +61,48 @@ body,
 .icon-field,
 .btn-play {
     background: url('../img/sprite.png') no-repeat;
+    background-size:-webkit-calc(var(--myvar) * 50.631);
     background-size:calc(var(--myvar) * 50.631);
 }
 
 /* typography */
 body {
+    font: normal -webkit-calc(var(--myvar) * 2.067) Playfair Display;
     font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: -webkit-calc(var(--myvar) * 2.755);
     line-height: calc(var(--myvar) * 2.755);
     color: #b9001f;
 
 }
 #menuShow div{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction:column;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -webkit-flex-direction:column;
+        -ms-flex-direction:column;
+            flex-direction:column;
 }
 #menuShow button{
+    margin-bottom: -webkit-calc(var(--myvar) * 2.755);
     margin-bottom: calc(var(--myvar) * 2.755);;
+    font: normal -webkit-calc(var(--myvar) * 2.067) Playfair Display;;
     font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: -webkit-calc(var(--myvar) * 2.755);
     line-height: calc(var(--myvar) * 2.755);
     color: #b9001f;
+    width: -webkit-calc(var(--myvar) * 20) ;
     width: calc(var(--myvar) * 20) ;
+    height: -webkit-calc(var(--myvar) * 5) ;
     height: calc(var(--myvar) * 5) ;
     border: black 1px solid;
-    border-radius:30%;
+    -webkit-border-radius:30%;
+            border-radius:30%;
 }
 
 #menuShow{
@@ -92,8 +110,17 @@ position: absolute;
 top: 0px;
 left:0px;
 
-    justify-content: center;
-    align-items:center;
+    -webkit-box-pack: center;
+
+    -webkit-justify-content: center;
+
+        -ms-flex-pack: center;
+
+            justify-content: center;
+    -webkit-box-align:center;
+    -webkit-align-items:center;
+        -ms-flex-align:center;
+            align-items:center;
     background-color:rgb(55, 166, 194);
     width:100vw;
     height: 100vh;
@@ -119,19 +146,31 @@ left:0px;
     width: 100%;
     z-index: 3000;
     background-color: rgb(55, 166, 194);
+    font: normal -webkit-calc(var(--myvar) * 2.067) Playfair Display;
     font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: -webkit-calc(var(--myvar) * 2.755);
     line-height: calc(var(--myvar) * 2.755);
     color: #b9001f;
     text-align: justify;
 
 }
 #recordsShow{
-    justify-content: space-between;
-    align-items:center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align:center;
+    -webkit-align-items:center;
+        -ms-flex-align:center;
+            align-items:center;
     background-color:rgb(55, 166, 194);
     padding-top: 10%;
     padding-bottom: 10%;
-    flex-direction:column;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -webkit-flex-direction:column;
+        -ms-flex-direction:column;
+            flex-direction:column;
     position: absolute;
 top: 0px;
 left:0px;
@@ -149,26 +188,38 @@ p {
 
 /* buttons */
 .btn-play {
+    width: -webkit-calc(var(--myvar) * 16.533);
     width: calc(var(--myvar) * 16.533);
+    height: -webkit-calc(var(--myvar) * 5.166);
     height: calc(var(--myvar) * 5.166);
     font-family: Playfair Display;
+    font-size: -webkit-calc(var(--myvar) * 2.755);
     font-size: calc(var(--myvar) * 2.755);
+    line-height: -webkit-calc(var(--myvar) * 4.592);
     line-height: calc(var(--myvar) * 4.592);
     color: #b9001f;
     text-align: center;
+    background-position: 0 -webkit-calc(var(--myvar) * -17.222);
     background-position: 0 calc(var(--myvar) * -17.222);
     cursor: pointer;
 }
 
 .btn-newgame {
+    font-size: -webkit-calc(var(--myvar) * 2.181);
     font-size: calc(var(--myvar) * 2.181);
     margin-top: 10px;
 }
 
 /* display */
 .flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 /*** CONTENT ***/
@@ -181,9 +232,17 @@ p {
 }
 
 .text-top {
+    height: -webkit-calc(var(--myvar) * 7.577);
     height: calc(var(--myvar) * 7.577);
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-size: -webkit-calc(var(--myvar) * 2.526);
     font-size: calc(var(--myvar) * 2.526);
     margin-bottom: 7px;
 }
@@ -194,125 +253,172 @@ p {
 
 .service-text {
     color: #c00;
+    padding-top: -webkit-calc(var(--myvar) * 1.148);
     padding-top: calc(var(--myvar) * 1.148);
 }
 
 .outer {
+    margin-bottom: -webkit-calc(var(--myvar) * 2.411);
     margin-bottom: calc(var(--myvar) * 2.411);
+    padding-left: -webkit-calc(var(--myvar) * 4.363);
     padding-left: calc(var(--myvar) * 4.363);
 }
 
 .field {
+    width: -webkit-calc(var(--myvar) * 41.33);
     width: calc(var(--myvar) * 41.33);
+    height: -webkit-calc(var(--myvar)* 41.33);
     height: calc(var(--myvar)* 41.33);
-    flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+            flex-shrink: 0;
     position: relative;
 }
 
 .field-computer {
+    margin-left: -webkit-calc(var(--myvar) * 3.56);
     margin-left: calc(var(--myvar) * 3.56);
 }
 
 .ships {
+    margin:-webkit-calc(var(--myvar) * -0.574) 0px 0px -webkit-calc(var(--myvar) * -0.574);
     margin:calc(var(--myvar) * -0.574) 0px 0px calc(var(--myvar) * -0.574);
+    border:-webkit-calc(var(--myvar) * 0.574) solid black;
     border:calc(var(--myvar) * 0.574) solid black;
-    box-sizing:content-box;
+    -webkit-box-sizing:content-box;
+            box-sizing:content-box;
+    width: -webkit-calc(var(--myvar) * 37.887);
     width: calc(var(--myvar) * 37.887);
+    height: -webkit-calc(var(--myvar) * 37.877);
     height: calc(var(--myvar) * 37.877);
     position: relative;
+    left: -webkit-calc(var(--myvar) * 3.330);
     left: calc(var(--myvar) * 3.330);
+    top: -webkit-calc(var(--myvar) * 3.1);
     top: calc(var(--myvar) * 3.1);
     background: url('../img/grid.png') repeat;
+    background-size:-webkit-calc(var(--myvar) * 7.577);
     background-size:calc(var(--myvar) * 7.577);
 }
 
 .ship {
+    height: -webkit-calc(var(--myvar) * 4.018);
     height: calc(var(--myvar) * 4.018);
     position: absolute;
 }
 .ships-collection{
+    width:-webkit-calc(var(--myvar) * 57.405);
     width:calc(var(--myvar) * 57.405);
 }
 
 .vertical {
-    transform: rotate(90deg);
-    transform-origin: calc(var(--myvar) * 2.009) calc(var(--myvar) * 2.009);
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+    -webkit-transform-origin: -webkit-calc(var(--myvar) * 2.009) -webkit-calc(var(--myvar) * 2.009);
+        -ms-transform-origin: calc(var(--myvar) * 2.009) calc(var(--myvar) * 2.009);
+            transform-origin: calc(var(--myvar) * 2.009) calc(var(--myvar) * 2.009);
 }
 
 .four {
+    width: -webkit-calc(var(--myvar) * 15.385);
     width: calc(var(--myvar) * 15.385);
     background-position: 0 0;
 }
 
 .four.success {
+    background-position: 0 -webkit-calc(var(--myvar) * -5.74);
     background-position: 0 calc(var(--myvar) * -5.74);;
 }
 
 .four.unsuccess {
+    background-position: 0 -webkit-calc(var(--myvar) * -11.481);
     background-position: 0 calc(var(--myvar) * -11.481);
 }
 
 .three {
+    width: -webkit-calc(var(--myvar) * 11.596);
     width: calc(var(--myvar) * 11.596);
+    background-position: -webkit-calc(var(--myvar) * -17.222) 0;
     background-position: calc(var(--myvar) * -17.222) 0;
 }
 
 .three.success {
+    background-position: -webkit-calc(var(--myvar) * -17.222) -webkit-calc(var(--myvar) * -5.74);
     background-position: calc(var(--myvar) * -17.222) calc(var(--myvar) * -5.74);
 }
 
 .three.unsuccess {
+    background-position: -webkit-calc(var(--myvar) * -17.222) -webkit-calc(var(--myvar) * -11.481);
     background-position: calc(var(--myvar) * -17.222) calc(var(--myvar) * -11.481);
 }
 
 .two {
+    width: -webkit-calc(var(--myvar) * 7.807);
     width: calc(var(--myvar) * 7.807);
+    background-position: -webkit-calc(var(--myvar) * -30.999) 0;
     background-position: calc(var(--myvar) * -30.999) 0;
 }
 
 .two.success {
+    background-position: -webkit-calc(var(--myvar) * -30.999) -webkit-calc(var(--myvar) * -5.74);
     background-position: calc(var(--myvar) * -30.999) calc(var(--myvar) * -5.74);;
 }
 
 .two.unsuccess {
+    background-position: -webkit-calc(var(--myvar) * -30.999) -webkit-calc(var(--myvar) * -11.481);
     background-position: calc(var(--myvar) * -30.999) calc(var(--myvar) * -11.481);
 }
 
 .one {
+    width: -webkit-calc(var(--myvar) * 4.018);
     width: calc(var(--myvar) * 4.018);
+    background-position: -webkit-calc(var(--myvar) * -41.332) 0;
     background-position: calc(var(--myvar) * -41.332) 0;
 }
 
 .one.success {
+    background-position: -webkit-calc(var(--myvar) * -41.332) -webkit-calc(var(--myvar) * -5.74);
     background-position: calc(var(--myvar) * -41.332) calc(var(--myvar) * -5.74);;
 }
 
 .one.unsuccess {
+    background-position: -webkit-calc(var(--myvar) * -41.332) -webkit-calc(var(--myvar) * -11.481);
     background-position: calc(var(--myvar) * -41.332) calc(var(--myvar) * -11.481);
 }
 
 .instruction {
+    margin-left: -webkit-calc(var(--myvar) * 2.985);
     margin-left: calc(var(--myvar) * 2.985);
     -webkit-user-select: none;
-    user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+         user-select: none;
+    max-width: -webkit-calc(100vw - var(--myvar) / 3.887);
     max-width: calc(100vw - var(--myvar) / 3.887);
 }
 
 .type-placement-box {
+    line-height: -webkit-calc(var(--myvar) * 3.904);
     line-height: calc(var(--myvar) * 3.904);
+    padding-bottom: -webkit-calc(var(--myvar) * 2.066);
     padding-bottom: calc(var(--myvar) * 2.066);
 }
 
 .type-placement-box .link {
+    font-size: -webkit-calc(var(--myvar) * 2.296);
     font-size: calc(var(--myvar) * 2.296);
+    border-bottom: dashed -webkit-calc(var(--myvar) * 0.23) #4530af;
     border-bottom: dashed calc(var(--myvar) * 0.23) #4530af;
     cursor: pointer;
 }
 
 .initial-ships li {
+    height: -webkit-calc(var(--myvar) * 4.018);
     height: calc(var(--myvar) * 4.018);
     position: relative;
     overflow: hidden;
+    margin-top: -webkit-calc(var(--myvar) * 3.559);
     margin-top: calc(var(--myvar) * 3.559);
 }
 
@@ -324,35 +430,44 @@ p {
 }
 
 .initial-ships .three1 {
+    left: -webkit-calc(var(--myvar) * 18.829);
     left: calc(var(--myvar) * 18.829);
 }
 
 .initial-ships .three2 {
+    left: -webkit-calc(var(--myvar) * 34.099);
     left: calc(var(--myvar) * 34.099);
 }
 
 .initial-ships .two2 {
+    left: -webkit-calc(var(--myvar) * 11.366);
     left: calc(var(--myvar) * 11.366);
 }
 
 .initial-ships .two3 {
+    left: -webkit-calc(var(--myvar) * 22.617);
     left: calc(var(--myvar) * 22.617);
 }
 
 .initial-ships .one2 {
+    left: -webkit-calc(var(--myvar) * 7.463);
     left: calc(var(--myvar) * 7.463);
 }
 
 .initial-ships .one3 {
+    left: -webkit-calc(var(--myvar) * 15.04);
     left: calc(var(--myvar) * 15.04);
 }
 
 .initial-ships .one4 {
+    left: -webkit-calc(var(--myvar) * 22.618);
     left: calc(var(--myvar) * 22.618);
 }
 
 .icon-field {
+    width: -webkit-calc(var(--myvar) * 3.789);
     width: calc(var(--myvar) * 3.789);
+    height: -webkit-calc(var(--myvar) * 3.789);
     height: calc(var(--myvar) * 3.789);
     display: block;
     position: absolute;
@@ -360,32 +475,50 @@ p {
 }
 
 .dot {
+    background-position: -webkit-calc(var(--myvar) * -47.072) 0;
     background-position: calc(var(--myvar) * -47.072) 0;
 }
 
 .red-cross {
+    background-position: -webkit-calc(var(--myvar) * -47.072) -webkit-calc(var(--myvar) * -5.74);
     background-position: calc(var(--myvar) * -47.072) calc(var(--myvar) * -5.74);;
 }
 
 .shaded-cell {
+    background-position: -webkit-calc(var(--myvar) * -47.072) -webkit-calc(var(--myvar) * -11.481);
     background-position: calc(var(--myvar) * -47.072) calc(var(--myvar) * -11.481);
 }
 
 .shaded-cell_red {
+    background-position: -webkit-calc(var(--myvar) * -47.072) -webkit-calc(var(--myvar) * -16.073);
     background-position: calc(var(--myvar) * -47.072) calc(var(--myvar) * -16.073);
 }
 #rec{
     padding-top: 10%;
     padding-bottom: 10%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between ;
-    align-items:center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between ;
+        -ms-flex-pack: justify;
+            justify-content: space-between ;
+    -webkit-box-align:center;
+    -webkit-align-items:center;
+        -ms-flex-align:center;
+            align-items:center;
     position: absolute;
     top:0px;
     width: 50%;
     height:100%;
-    border-radius: 10% 0 0 10%;
+    -webkit-border-radius: 10% 0 0 10%;
+            border-radius: 10% 0 0 10%;
     right: 0px;
     z-index: 3000;
     background-color: #eeb46d;
@@ -398,31 +531,57 @@ p {
     top:0px;
     left:0px;
     width: 100%;
-    border-radius: 0 0 10% 10%;
+    -webkit-border-radius: 0 0 10% 10%;
+            border-radius: 0 0 10% 10%;
     z-index: 3000;
     background-color: #eeb46d;
+    font: normal -webkit-calc(var(--myvar) * 2.067) Playfair Display;
     font: normal calc(var(--myvar) * 2.067) Playfair Display;
+    line-height: -webkit-calc(var(--myvar) * 2.755);
     line-height: calc(var(--myvar) * 2.755);
     color: #b9001f;
  }
  #rul p{margin-bottom: 0px;}
 
 .explosion {
+    background-position: -webkit-calc(var(--myvar) * -17.222) -webkit-calc(var(--myvar) * -17.222);
     background-position: calc(var(--myvar) * -17.222) calc(var(--myvar) * -17.222);
     z-index: 6;
     opacity: 0;
-    transform: scale(.2);
+    -webkit-transform: scale(.2);
+        -ms-transform: scale(.2);
+            transform: scale(.2);
+}
+
+@-webkit-keyframes Explosion {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.2);
+                transform: scale(.2);
+    }
+
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes Explosion {
     0% {
         opacity: 0;
-        transform: scale(.2);
+        -webkit-transform: scale(.2);
+                transform: scale(.2);
     }
 
     50% {
         opacity: 1;
-        transform: scale(1);
+        -webkit-transform: scale(1);
+                transform: scale(1);
     }
 
     100% {
@@ -431,74 +590,142 @@ p {
 }
 
 .explosion.active {
-    animation-name: Explosion;
-    animation-duration: 0.4s;
-    transform: scale(1);
+    -webkit-animation-name: Explosion;
+            animation-name: Explosion;
+    -webkit-animation-duration: 0.4s;
+            animation-duration: 0.4s;
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
 }
-@keyframes toLeft {
+@-webkit-keyframes toLeft {
     from{
-        transform: translateX(50%) ;
+        -webkit-transform: translateX(50%) ;
+                transform: translateX(50%) ;
         opacity: 0;
     }
     to{
-        transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+                transform: translateX(0%);
         opacity: 1;
+    }
+}
+@keyframes toLeft {
+    from{
+        -webkit-transform: translateX(50%) ;
+                transform: translateX(50%) ;
+        opacity: 0;
+    }
+    to{
+        -webkit-transform: translateX(0%);
+                transform: translateX(0%);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes toRight {
+    from{
+        -webkit-transform: translateX(0%);
+                transform: translateX(0%);
+        opacity: 1;
+    }
+    to{
+        -webkit-transform: translateX(50%);
+                transform: translateX(50%);
+        opacity: 0;
     }
 }
 @keyframes toRight {
     from{
-        transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+                transform: translateX(0%);
         opacity: 1;
     }
     to{
-        transform: translateX(50%);
+        -webkit-transform: translateX(50%);
+                transform: translateX(50%);
+        opacity: 0;
+    }
+}
+@-webkit-keyframes toUp {
+    from{
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+        opacity: 1;
+    }
+    to{
+        -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
         opacity: 0;
     }
 }
 @keyframes toUp {
     from{
-        transform: translateY(0px);
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
         opacity: 1;
     }
     to{
-        transform: translateY(-100%);
+        -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
         opacity: 0;
+    }
+}
+@-webkit-keyframes toDown {
+    from{
+        -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+        opacity: 0;
+    }
+    to{
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+        opacity: 1;
     }
 }
 @keyframes toDown {
     from{
-        transform: translateY(-100%);
+        -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
         opacity: 0;
     }
     to{
-        transform: translateY(0px);
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
         opacity: 1;
     }
 }
 .l{
     overflow: hidden;
-    animation-name: toRight;
-    animation-duration: 1s;
+    -webkit-animation-name: toRight;
+            animation-name: toRight;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
     opacity: 0;
     
 }
 .r{
     overflow: hidden;
-    animation-duration:1s;
-    animation-name:toLeft;
+    -webkit-animation-duration:1s;
+            animation-duration:1s;
+    -webkit-animation-name:toLeft;
+            animation-name:toLeft;
     right: -50%;
 }
 .u{
     overflow: hidden;
-    animation-name: toUp;
-    animation-duration: 1s;
+    -webkit-animation-name: toUp;
+            animation-name: toUp;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
     opacity: 0;
     
 }
 .d{
     overflow: hidden;
-    animation-duration:1s;
-    animation-name:toDown;
+    -webkit-animation-duration:1s;
+            animation-duration:1s;
+    -webkit-animation-name:toDown;
+            animation-name:toDown;
     right: -50%;
 }
 .firstR{
@@ -517,25 +744,41 @@ g .off{
 #icons{
     z-index: 2000;
     position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
 
+    left: -webkit-calc(var(--myvar) *  4);
+
     left: calc(var(--myvar) *  4);
+    top: -webkit-calc(var(--myvar)*70);
     top: calc(var(--myvar)*70);
     overflow: hidden;
 }
 #menuicon{
     z-index: 2;
+    -webkit-transition:-webkit-transform 0.5s linear;
+    transition:-webkit-transform 0.5s linear;
+    -o-transition:transform 0.5s linear;
     transition:transform 0.5s linear;
+    transition:transform 0.5s linear, -webkit-transform 0.5s linear;
 }
 #icons:hover #iconsMenu{
+    left: -webkit-calc(var(--myvar) * 0);
     left: calc(var(--myvar) * 0);
 }
 #icons:hover #menuicon{
-    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
 }
 #iconsMenu{
     z-index: 0;
     position: relative;
+    left:-webkit-calc(var(--myvar) * -50);
     left:calc(var(--myvar) * -50);
+    -webkit-transition:left 0.5s linear;
+    -o-transition:left 0.5s linear;
     transition:left 0.5s linear;
 }
