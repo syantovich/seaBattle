@@ -47,11 +47,27 @@ let SPAState;
   }
 let rulseicon=document.getElementById("rulei");
 let recordsi=document.getElementById("recordsi");
+let music=document.getElementById("musicicon");
+music.addEventListener("click",()=>{
+	flagSoundOn=!flagSoundOn;
+	let on=music.querySelector(".on");
+	let off=music.querySelector(".off");
+	if(flagSoundOn){
+		on.style.display="block";
+		off.style.display="none";
+	}else{
+		off.style.display="block";
+		on.style.display="none";
+	}
+});
+
 rulseicon.addEventListener("click",()=>switchToState(rulseicon));
 recordsi.addEventListener("click",()=>switchToState(recordsi));
 var myVar;
 var rec = [];
 let flagRec = true;
+let flagSoundOn=true;
+let pcWin=false;
 let kInfo = 1;
 let wrap= document.querySelector(".wrap");
 var hammertimeSwipeH = new Hammer(wrap);
@@ -176,8 +192,8 @@ fetchrRec();
 hammertimeSwipeH.on('swipe', function (ev) {
 
 	ev.preventDefault();
-
-			let divRec = document.querySelector("#rec");
+	if (flagRec){
+		let divRec = document.querySelector("#rec");
 			let direc = ev.direction;
 			switch (direc) {
 			case 4: {
@@ -199,6 +215,8 @@ hammertimeSwipeH.on('swipe', function (ev) {
 				break;
 			}
 		}
+	}
+			
 			});
 
 
@@ -283,6 +301,7 @@ hammertimeSwipeH.on('swipe', function (ev) {
 					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 				];
 				this.infoship = {};
+
 				this.score = 0;
 				this.updateInfo = {};
 				this.field = field;
@@ -512,7 +531,8 @@ hammertimeSwipeH.on('swipe', function (ev) {
 			e.target.hidden = true;
 			instruction.hidden = true;
 			pcArea_field.parentElement.hidden = false;
-			toptext.innerHTML = 'Счет: 0';
+			let s=(!myArea.score)?0:pcArea.score-myArea.score;
+			toptext.innerHTML = `Счет: ${s}`;
 			pcArea = new Area(pcArea_field);
 			pcArea.cleanField();
 			pcArea.randomLocation();
@@ -520,6 +540,27 @@ hammertimeSwipeH.on('swipe', function (ev) {
 			if (!control) control = new Controller();
 
 			control.init();
+		});
+		buttonNewGame.addEventListener('click', function(e) {
+			buttonNewGame.hidden = true;
+			pcArea_field.parentElement.hidden = true;
+			instruction.hidden = false;
+			myArea.cleanField();
+			toptext.innerHTML = 'Расстановка кораблей';
+			if(pcWin){
+				pcArea.score=0;
+				myArea.score=0;
+			}
+			
+			Controller.infoship.innerHTML = '';
+		 
+			flagStart = false;
+			flagPcShots = false;
+
+			control.coordsRandom = [];
+			control.coordsArounf = [];
+			control.coordrsFixed = [];
+			control.removeTemporary();
 		});
 
 
@@ -549,7 +590,7 @@ hammertimeSwipeH.on('swipe', function (ev) {
 
 					let value = !shipsCollection.hidden;
 
-					if (shipsCollection.children.length > 1) {
+					if (shipsCollection.children.length > 0) {
 						shipsCollection.removeChild(shipsCollection.lastChild);
 					}
 
@@ -1227,12 +1268,21 @@ hammertimeSwipeH.on('swipe', function (ev) {
 				}
 				if (Object.keys(this.enemy.infoship).length == 0) {
 					if (this.enemy === myArea) {
-						text = 'К сожалению, вы проиграли.';
+						text = 'К сожалению, вы проиграли. Нажмите продолжить для новой игры!';
 						sound.gameover();
 						checkRec(pcArea.score-myArea.score);
+						pcWin=true;
+						myArea.score=0;
+						buttonNewGame.hidden=false;
+						
+
 						
 					} else {
-						text = 'Поздравляем! Вы выиграли!';
+						text = 'Поздравляем! Вы выиграли!Нажмите продолжить для дальнейшей игры!';
+						pcWin=false;
+						myArea.score=myArea.score-pcArea.score;
+						buttonNewGame.hidden=false;
+
 					}
 					Controller.infoship.innerText = text;
 					buttonNewGame.hidden = false;
@@ -1417,45 +1467,60 @@ hammertimeSwipeH.on('swipe', function (ev) {
 		///////////////Sounds
 		var sound = {
 			fire() {
-
-				let audio = new Audio();
+				if(flagSoundOn){
+					let audio = new Audio();
 				audio.src = '../sounds/fire.mp3';
 				audio.autoplay = true;
+				}
+				
 			},
 			gameover() {
-
-				let audio = new Audio();
+				if(flagSoundOn){
+					let audio = new Audio();
 				audio.src = '../sounds/gameover.mp3';
 				audio.autoplay = true;
+				}
+				
 			},
 			gamewon() {
-
-				let audio = new Audio();
+				if(flagSoundOn){
+					let audio = new Audio();
 				audio.src = '../sounds/game-won.mp3';
 				audio.autoplay = true;
+				}
+				
 			},
 			pencil() {
-
-				let audio = new Audio();
+				if(flagSoundOn){
+					let audio = new Audio();
 				audio.src = '../sounds/pencil.mp3';
 				audio.autoplay = true;
+				}
+				
 			},
 			water() {
-
-				let audio = new Audio();
+				if(flagSoundOn){
+					let audio = new Audio();
 				audio.src = '../sounds/water.mp3';
 				audio.autoplay = true;
+				}
+				
 			},
 			must() {
-
-				let audio = new Audio();
+				if(flagSoundOn){
+					let audio = new Audio();
 				audio.src = '../sounds/must_not.mp3';
 				audio.autoplay = true;
+				}
+				
 			},
 			shaded() {
-				let audio = new Audio();
+				if(flagSoundOn){
+					let audio = new Audio();
 				audio.src = '../sounds/shaded_placed.mp3';
 				audio.autoplay = true;
+				}
+				
 			}
 
 		};
