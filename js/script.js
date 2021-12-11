@@ -204,8 +204,6 @@ window.addEventListener("load",()=>{
 	}
 	fetchrRec();
 	hammertimeSwipeH.on('swipe', function (ev) {
-	
-		ev.preventDefault();
 		if (flagRec) {
 			let divRec = document.querySelector("#rec");
 			let direc = ev.direction;
