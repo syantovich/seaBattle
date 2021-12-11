@@ -783,7 +783,7 @@ g .off{
 }
 @media screen and (orientation: landscape) {
     :root{
-        --myvar:1.5vh;
+        --myvar:1.4vh;
     }
     #gamei,#recordsi,#rulei{
         display: none;
