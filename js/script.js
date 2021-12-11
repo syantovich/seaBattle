@@ -1486,6 +1486,7 @@ window.addEventListener("load",()=>{
 	var sound = {
 		fire() {
 			if (flagSoundOn) {
+				window.navigator.vibrate([100,50,100,50]);
 				let audio = new Audio();
 				audio.src = '../sounds/fire.mp3';
 				audio.autoplay = true;
@@ -1517,6 +1518,7 @@ window.addEventListener("load",()=>{
 	
 		},
 		water() {
+			window.navigator.vibrate(500);
 			if (flagSoundOn) {
 				let audio = new Audio();
 				audio.src = '../sounds/water.mp3';
