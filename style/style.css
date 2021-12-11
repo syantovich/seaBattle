@@ -1,7 +1,5 @@
 /* reset */
-:root{
-    --myvar:min(1vh,1vw);
-}
+
 .delete { display: none; }
 html,
 body,
@@ -260,8 +258,7 @@ p {
 .outer {
     margin-bottom: -webkit-calc(var(--myvar) * 2.411);
     margin-bottom: calc(var(--myvar) * 2.411);
-    padding-left: -webkit-calc(var(--myvar) * 4.363);
-    padding-left: calc(var(--myvar) * 4.363);
+    
 }
 
 .field {
@@ -308,7 +305,7 @@ p {
 }
 .ships-collection{
     width:-webkit-calc(var(--myvar) * 57.405);
-    width:calc(var(--myvar) * 57.405);
+    width:calc(var(--myvar) * 49);
 }
 
 .vertical {
@@ -748,12 +745,12 @@ g .off{
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-
+    flex-direction: column-reverse;
     left: -webkit-calc(var(--myvar) *  4);
 
     left: calc(var(--myvar) *  4);
-    bottom: -webkit-calc(var(--myvar)*4);
-    bottom: calc(var(--myvar)*4);
+    bottom: -webkit-calc(var(--myvar)*1);
+    bottom: calc(var(--myvar)*1);
     overflow: hidden;
 }
 #menui{
@@ -765,8 +762,10 @@ g .off{
     transition:transform 0.5s linear, -webkit-transform 0.5s linear;
 }
 #icons:hover #iconsMenu{
-    left: -webkit-calc(var(--myvar) * 0);
-    left: calc(var(--myvar) * 0);
+    transform: translateY(0);
+    -webkit-transition:transform 0.5s linear;
+    -o-transition:transform 0.5s linear;
+    transition:transform 0.5s linear;
 }
 #icons:hover #menui{
     -webkit-transform: rotate(90deg);
@@ -774,10 +773,31 @@ g .off{
             transform: rotate(90deg);
 }
 #iconsMenu{
+    transform: translateY(100%);
+    display: flex;
+    flex-direction: column-reverse;
     z-index: 0;
     position: relative;
-    left:-100%;
-    -webkit-transition:left 0.5s linear;
-    -o-transition:left 0.5s linear;
-    transition:left 0.5s linear;
+    -webkit-transition:transform 0.5s linear;
+    -o-transition:transform 0.5s linear;
+    transition:transform 0.5s linear;
 }
+@media screen and (orientation: landscape) {
+    :root{
+        --myvar:1.5vh;
+    }
+    #gamei,#recordsi,#rulei{
+        display: none;
+    }
+  }
+
+
+  @media screen and (orientation: portrait) {
+    :root{
+        --myvar:1vw;
+    }
+    #gamei,#recordsi,#rulei{
+        display: block;
+    }
+  }
+  

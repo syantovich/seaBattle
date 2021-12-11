@@ -50,9 +50,8 @@ window.addEventListener("load",()=>{
 	}
 	let rulseicon = document.getElementById("rulei");
 	let recordsi = document.getElementById("recordsi");
-	let music = document.getElementById("musicicon");
-	let menui=document.getElementById("menui");
 	let gamei=document.getElementById("gamei");
+	let music=document.getElementById("musicicon");
 	music.addEventListener("click", () => {
 		flagSoundOn = !flagSoundOn;
 		let on = music.querySelector(".on");
@@ -69,7 +68,6 @@ window.addEventListener("load",()=>{
 	rulseicon.addEventListener("click", () => switchToState(rulseicon));
 	recordsi.addEventListener("click", () => switchToState(recordsi));
 	gamei.addEventListener("click", () => switchToState(gamei));
-	menui.addEventListener("click", () => switchToState(menui));
 
 	var myVar;
 	var rec = [];
@@ -300,8 +298,8 @@ window.addEventListener("load",()=>{
 			this.sizeShip = (myVar * 3.789).toFixed(3);
 			let svg = document.querySelectorAll(".svg");
 			svg.forEach(e => {
-				e.setAttribute("width", (11.481 * myVar).toFixed(3));
-				e.setAttribute("height", (11.481 * myVar).toFixed(3));
+				e.setAttribute("width", (8 * myVar).toFixed(3));
+				e.setAttribute("height", (8 * myVar).toFixed(3));
 			});
 			this.k = 1;
 			this.matrix = [
@@ -969,6 +967,9 @@ window.addEventListener("load",()=>{
 	}
 	
 	let myArea = new Area(myArea_field);
+	window.addEventListener("orientationchange",()=>{
+		Controller.updateSize();
+	});
 	window.addEventListener("resize", e => {
 		Controller.updateSize();
 	
@@ -1009,8 +1010,8 @@ window.addEventListener("load",()=>{
 			myArea.sizeShip = pcArea.sizeArea = (myVar * 3.789).toFixed(3);
 			let svg = document.querySelectorAll(".svg");
 			svg.forEach(e => {
-				e.setAttribute("width", (11.481 * myVar).toFixed(3));
-				e.setAttribute("height", (11.481 * myVar).toFixed(3));
+				e.setAttribute("width", (8 * myVar).toFixed(3));
+				e.setAttribute("height", (8 * myVar).toFixed(3));
 			});
 			let o = myArea_field;
 			let {
@@ -1545,7 +1546,7 @@ window.addEventListener("load",()=>{
 	};
 	window.addEventListener("beforeunload", (e) => {
 		e = e || window.event;
-		if (Object.keys(myArea.infoship).length) {
+		if (Object.keys(myArea.infoship).length||myArea.score) {
 			e.returnValue = "Ваш прогресс не сохраниться ,вы уверены выйти?";
 		}
 	
